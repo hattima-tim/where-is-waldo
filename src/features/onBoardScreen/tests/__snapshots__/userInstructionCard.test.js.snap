@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserInstructionCard component is rendered correctly 1`] = `
+<div>
+  <div
+    class="flex w-11/12 border bg-white lg:w-3/5"
+  >
+    <img
+      alt="universe-113"
+      class="w-1/2"
+      src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg"
+    />
+    <div
+      class="flex flex-col items-center gap-4 p-4"
+    >
+      <h2>
+        Universe 113
+      </h2>
+      <p>
+        by Egor Klyuchnyk
+      </p>
+      <p>
+        Cacodemon
+      </p>
+      <p>
+        Bill Cipher
+      </p>
+      <p>
+        Courage
+      </p>
+      <button
+        class="rounded-full bg-gradient-to-r from-[#2a2c80] via-[#fd1d1d] to-[#fcb045] py-2 px-4 font-bold uppercase text-white transition-transform duration-300 ease-in-out hover:scale-110"
+      >
+        Start
+      </button>
+    </div>
+  </div>
+</div>
+`;
