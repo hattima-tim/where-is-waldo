@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders onBoardScreen correctly 1`] = `
+<div>
+  <div
+    class="flex flex-col items-center justify-center gap-6 bg-black"
+  >
+    <h1
+      class="mt-8 text-lg font-bold text-white"
+    >
+      Where's Waldo
+    </h1>
+    <p
+      class="text-white"
+    >
+      Find these characters on universe 113!
+    </p>
+    <p>
+      User Instruction Card
+    </p>
+  </div>
+</div>
+`;
