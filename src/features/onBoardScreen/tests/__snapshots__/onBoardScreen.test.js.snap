@@ -3,7 +3,7 @@
 exports[`renders onBoardScreen correctly 1`] = `
 <div>
   <div
-    class="flex flex-col items-center justify-center gap-6 bg-black"
+    class="false z-10 flex w-full flex-col items-center justify-center gap-6 bg-[rgba(0,0,0,0.9)]"
   >
     <h1
       class="mt-8 text-lg font-bold text-white"
