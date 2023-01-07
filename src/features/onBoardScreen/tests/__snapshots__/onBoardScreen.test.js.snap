@@ -3,7 +3,7 @@
 exports[`renders onBoardScreen correctly 1`] = `
 <div>
   <div
-    class="false z-10 flex w-full flex-col items-center justify-center gap-6 bg-[rgba(0,0,0,0.9)]"
+    class="z-10 flex w-full flex-col items-center justify-center gap-6 bg-[rgba(0,0,0,0.9)]"
   >
     <h1
       class="mt-8 text-lg font-bold text-white"
@@ -15,9 +15,15 @@ exports[`renders onBoardScreen correctly 1`] = `
     >
       Find these characters on universe 113!
     </p>
-    <p>
-      User Instruction Card
-    </p>
+    <div>
+      <p>
+        User Instruction Card
+      </p>
+      ;
+      <button>
+        Start
+      </button>
+    </div>
   </div>
 </div>
 `;
