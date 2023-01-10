@@ -1,4 +1,4 @@
-import Characters from "./character";
+import Characters from "./characters";
 
 export default function UserInstructionCard({ setIsGameOn }) {
   return (
