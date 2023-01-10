@@ -27,7 +27,7 @@ export default function Characters() {
     <div>
       {characters.map((character) => {
         return (
-          <div key={character.name} className="flex w-full flex-col">
+          <div key={character.name} className="flex hover:scale-105 w-full flex-col">
             <p className="self-end">{character.difficultyLevel}</p>
             <div className="flex gap-4">
               <img
