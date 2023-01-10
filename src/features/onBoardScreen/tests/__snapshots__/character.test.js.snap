@@ -2,29 +2,83 @@
 
 exports[`Character component is rendered correctly 1`] = `
 <div>
-  <div
-    class="flex w-full flex-col"
-  >
-    <p
-      class="self-end"
-    >
-      easy
-    </p>
+  <div>
     <div
-      class="flex gap-4"
+      class="flex hover:scale-105 w-full flex-col"
     >
-      <img
-        alt="cacodemon"
-        class="w-8"
-        src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759163/Where%27s%20Waldo/cacodemon.1dad269c_ajnuga.png"
-      />
-      <div>
-        <h4>
-          Cacodemon
-        </h4>
-        <p>
-          Doom
-        </p>
+      <p
+        class="self-end"
+      >
+        easy
+      </p>
+      <div
+        class="flex gap-4"
+      >
+        <img
+          alt="cacodemon"
+          class="w-8"
+          src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759163/Where%27s%20Waldo/cacodemon.1dad269c_ajnuga.png"
+        />
+        <div>
+          <h4>
+            Cacodemon
+          </h4>
+          <p>
+            Doom
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex hover:scale-105 w-full flex-col"
+    >
+      <p
+        class="self-end"
+      >
+        medium
+      </p>
+      <div
+        class="flex gap-4"
+      >
+        <img
+          alt="bill cipher"
+          class="w-8"
+          src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759181/Where%27s%20Waldo/bill-cipher.1e7e0fc4_jfln6r.png"
+        />
+        <div>
+          <h4>
+            Bill Cipher
+          </h4>
+          <p>
+            Gravity Falls
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex hover:scale-105 w-full flex-col"
+    >
+      <p
+        class="self-end"
+      >
+        hard
+      </p>
+      <div
+        class="flex gap-4"
+      >
+        <img
+          alt="courage"
+          class="w-8"
+          src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759200/Where%27s%20Waldo/courage.200fe7a8_jkf3vs.png"
+        />
+        <div>
+          <h4>
+            Courage
+          </h4>
+          <p>
+            Courage the Cowardly Dog
+          </p>
+        </div>
       </div>
     </div>
   </div>
