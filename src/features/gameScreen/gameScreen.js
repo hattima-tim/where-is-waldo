@@ -1,10 +1,34 @@
 import { useState } from "react";
-import Character from "../onBoardScreen/character";
+import Characters from "../onBoardScreen/characters";
+import CharacterSelector from "./characterSelector";
 
 export default function GameScreen() {
   const [counter, setCounter] = useState("00.00.00");
+
   const [showCharacterListTooltip, setShowCharacterListTooltip] =
     useState(false);
+
+  const [showCharacterSelector, setShowCharacterSelector] = useState(false);
+
+  const [targetLocation, setTargetLocation] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  const handleTargetAreaClick = (e) => {
+    setShowCharacterSelector(!showCharacterSelector);
+    setTargetLocation({
+      x: e.pageX,
+      y: e.pageY,
+    });
+  };
+
+  const { x, y } = targetLocation;
+  const location = {
+    position: "absolute",
+    left: x,
+    top: y,
+  };
 
   return (
     <div>
@@ -27,35 +51,7 @@ export default function GameScreen() {
 
           {showCharacterListTooltip && (
             <div className="absolute right-40 z-10 w-72 rounded-md bg-[#17134d] p-4 text-white transition-all">
-              <Character
-                difficultyLevel={"easy"}
-                src={
-                  "https://res.cloudinary.com/du3oueesv/image/upload/v1672759163/Where%27s%20Waldo/cacodemon.1dad269c_ajnuga.png"
-                }
-                alt={"cacodemon"}
-                characterName={"Cacodemon"}
-                reference={"Doom"}
-              />
-
-              <Character
-                difficultyLevel={"medium"}
-                src={
-                  "https://res.cloudinary.com/du3oueesv/image/upload/v1672759181/Where%27s%20Waldo/bill-cipher.1e7e0fc4_jfln6r.png"
-                }
-                alt={"bill cipher"}
-                characterName={"Bill Cipher"}
-                reference={"Gravity Falls"}
-              />
-
-              <Character
-                difficultyLevel={"hard"}
-                src={
-                  "https://res.cloudinary.com/du3oueesv/image/upload/v1672759200/Where%27s%20Waldo/courage.200fe7a8_jkf3vs.png"
-                }
-                alt={"courage"}
-                characterName={"Courage"}
-                reference={"Courage the Cowardly Dog"}
-              />
+              <Characters />
             </div>
           )}
         </div>
@@ -64,7 +60,10 @@ export default function GameScreen() {
         src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg"
         alt="universe-113"
         className="cursor-[url('https://res.cloudinary.com/du3oueesv/image/upload/v1673284323/Where%27s%20Waldo/Where_s_Waldo_dot_k9q85x-media_lib_thumb_i9xieg.png'),auto]"
+        onClick={handleTargetAreaClick}
       ></img>
+
+      {showCharacterSelector && <CharacterSelector location={location} />}
     </div>
   );
 }
