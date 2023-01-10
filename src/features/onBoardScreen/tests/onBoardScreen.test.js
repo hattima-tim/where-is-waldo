@@ -2,8 +2,14 @@ import { render,screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import OnBoardScreen from "../onBoardScreen";
 
-jest.mock("../character", () => ({ characterName }) => {
-  return <p>{characterName}</p>;
+jest.mock("../characters", () => () => {
+  return (
+    <>
+    <p>Cacodemon</p>
+    <p>Bill Cipher</p>
+    <p>Courage</p>
+  </>
+  )
 });
 
 jest.mock("../userInstructionCard", () => ({setIsGameOn}) => {
