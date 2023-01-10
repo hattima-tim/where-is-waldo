@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { async } from "q";
 import { toMatchDiffSnapshot } from "snapshot-diff";
 import GameScreen from "../gameScreen";
 
@@ -28,6 +29,17 @@ test("clicking the circle with 3 written in it, shows a tooltip of characters", 
 
   const circle = screen.getByText(/3/i);
   await user.click(circle);
+
+  expect(firstRender).toMatchDiffSnapshot(asFragment());
+});
+
+test("clicking on gameImage shows character selector", async () => {
+  const user = userEvent.setup();
+  const { asFragment } = render(<GameScreen />);
+  const firstRender = asFragment();
+  const gameImage = screen.getByRole("img");
+
+  await user.click(gameImage);
 
   expect(firstRender).toMatchDiffSnapshot(asFragment());
 });

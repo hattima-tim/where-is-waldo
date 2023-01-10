@@ -39,6 +39,44 @@ exports[`GameScreen is rendered correctly 1`] = `
 </div>
 `;
 
+exports[`clicking on gameImage shows character selector 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -30,7 +30,30 @@
+      <img
+        alt=\\"universe-113\\"
+        class=\\"cursor-[url('https://res.cloudinary.com/du3oueesv/image/upload/v1673284323/Where%27s%20Waldo/Where_s_Waldo_dot_k9q85x-media_lib_thumb_i9xieg.png'),auto]\\"
+        src=\\"https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg\\"
+      />
++     <div
++       class=\\"flex\\"
++       style=\\"position: absolute;\\"
++     >
++       <img
++         alt=\\"targetCircle\\"
++         class=\\"max-h-16 w-16\\"
++         src=\\"https://res.cloudinary.com/du3oueesv/image/upload/v1673284323/Where%27s%20Waldo/Where_s_Waldo_dot_k9q85x-media_lib_thumb_i9xieg.png\\"
++       />
++       <div
++         class=\\"z-10 w-72 rounded-md bg-[#17134d] p-4 text-white transition-all\\"
++       >
++         <p>
++           Cacodemon
++         </p>
++         <p>
++           Bill Cipher
++         </p>
++         <p>
++           Courage
++         </p>
++       </div>
++     </div>
+    </div>
+  </DocumentFragment>"
+`;
+
 exports[`clicking the circle with 3 written in it, shows a tooltip of characters 1`] = `
 "Snapshot Diff:
 - First value
