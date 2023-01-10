@@ -17,7 +17,7 @@ export default function GameScreen() {
         </div>
         <div>
           <div
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-[#8d0c0c] text-2xl text-white"
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[#8d0c0c] text-2xl text-white"
             onClick={() =>
               setShowCharacterListTooltip(!showCharacterListTooltip)
             }
@@ -63,6 +63,7 @@ export default function GameScreen() {
       <img
         src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg"
         alt="universe-113"
+        className="cursor-[url('https://res.cloudinary.com/du3oueesv/image/upload/v1673284323/Where%27s%20Waldo/Where_s_Waldo_dot_k9q85x-media_lib_thumb_i9xieg.png'),auto]"
       ></img>
     </div>
   );
