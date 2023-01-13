@@ -18,8 +18,8 @@ export default function GameScreen() {
   const handleTargetAreaClick = (e) => {
     setShowCharacterSelector(!showCharacterSelector);
     setTargetLocation({
-      x: e.pageX,
-      y: e.pageY,
+      x: e.pageX-32, // 32 is the lalf of the target circle
+      y: e.pageY-32
     });
   };
 
@@ -27,9 +27,9 @@ export default function GameScreen() {
   const location = {
     position: "absolute",
     left: x,
-    top: y,
+    top: y
   };
-
+  
   return (
     <div>
       <header className="flex h-16 items-center justify-around bg-[#0e0c31]">
