@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Characters from "../onBoardScreen/characters";
 import CharacterSelector from "./characterSelector";
 
 export default function GameScreen() {
-  const [counter, setCounter] = useState("00.00.00");
+  const gameImgRef = useRef(null);
+  const headerRef = useRef(null);
 
+  const [counter, setCounter] = useState("00.00.00");
   const [showCharacterListTooltip, setShowCharacterListTooltip] =
     useState(false);
-
   const [showCharacterSelector, setShowCharacterSelector] = useState(false);
-
   const [targetLocation, setTargetLocation] = useState({
     x: 0,
     y: 0,
@@ -18,8 +18,9 @@ export default function GameScreen() {
   const handleTargetAreaClick = (e) => {
     setShowCharacterSelector(!showCharacterSelector);
     setTargetLocation({
-      x: e.pageX-32, // 32 is the lalf of the target circle
-      y: e.pageY-32
+      x: e.pageX - 32, // 32 is the lalf of the target circle
+      y: e.pageY - 32, // so,here I am moving the target circle to the center
+      // of clicked point
     });
   };
 
@@ -27,12 +28,15 @@ export default function GameScreen() {
   const location = {
     position: "absolute",
     left: x,
-    top: y
+    top: y,
   };
-  
+
   return (
     <div>
-      <header className="flex h-16 items-center justify-around bg-[#0e0c31]">
+      <header
+        className="flex h-16 items-center justify-around bg-[#0e0c31]"
+        ref={headerRef}
+      >
         <h1 className="text-2xl font-bold text-white">
           Where's <span className="text-[#ff0000]">Waldo</span>
         </h1>
@@ -59,11 +63,17 @@ export default function GameScreen() {
       <img
         src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg"
         alt="universe-113"
-        className="cursor-[url('https://res.cloudinary.com/du3oueesv/image/upload/v1673284323/Where%27s%20Waldo/Where_s_Waldo_dot_k9q85x-media_lib_thumb_i9xieg.png'),auto]"
+        ref={gameImgRef}
         onClick={handleTargetAreaClick}
       ></img>
 
-      {showCharacterSelector && <CharacterSelector location={location} />}
+      {showCharacterSelector && (
+        <CharacterSelector
+          location={location}
+          gameImgRef={gameImgRef}
+          headerRef={headerRef}
+        />
+      )}
     </div>
   );
 }
