@@ -1,4 +1,4 @@
-export default function Characters() {
+export default function Characters({handleCharacterSelection = null}) {
   const characters = [
     {
       difficultyLevel: "easy",
@@ -27,7 +27,11 @@ export default function Characters() {
     <div>
       {characters.map((character) => {
         return (
-          <div key={character.name} className="flex hover:scale-105 w-full flex-col">
+          <div
+            key={character.name}
+            className="flex w-full flex-col hover:scale-105"
+            onClick={() => handleCharacterSelection(character.name)}
+          >
             <p className="self-end">{character.difficultyLevel}</p>
             <div className="flex gap-4">
               <img
