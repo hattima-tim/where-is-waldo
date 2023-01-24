@@ -1,4 +1,11 @@
 import { useRef, useState } from "react";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 import Characters from "../onBoardScreen/characters";
 import CharacterSelector from "./characterSelector";
 
@@ -29,6 +36,76 @@ export default function GameScreen() {
     position: "absolute",
     left: x,
     top: y,
+  };
+
+  const initialGameImgWidth = 1366;
+  const initialGameImgHeight = 1931.6;
+
+  const returnAdjustedLocation = () => {
+    const currentImgWidth = gameImgRef.current.getBoundingClientRect().width;
+    const currentImgHeight = gameImgRef.current.getBoundingClientRect().height;
+    const headerHeight = headerRef.current.getBoundingClientRect().height;
+
+    // adjust the location for different screens with above information
+    const clickedLocationLeftSideLengthOnGameImg = Math.trunc(
+      (initialGameImgWidth / currentImgWidth) * (location.left + 32) // see gamescreen.js for why 32 is added
+    );
+
+    const clickedLocationTopSideLengthOnGameImg = Math.trunc(
+      (initialGameImgHeight / currentImgHeight) *
+        (location.top - headerHeight + 32)
+    ); // since location.top is calculated with pageY, it contains header height
+
+    return {
+      clickedLocationLeftSideLengthOnGameImg,
+      clickedLocationTopSideLengthOnGameImg,
+    };
+  };
+
+  const isCharacterSelectionRight = async (
+    characterName,
+    clickedLocationLeftSideLengthOnGameImg,
+    clickedLocationTopSideLengthOnGameImg
+  ) => {
+    const db = getFirestore();
+    const charactersRef = collection(db, "characters");
+    const q = query(
+      charactersRef,
+      where(
+        "coordinates",
+        "array-contains",
+        `${clickedLocationLeftSideLengthOnGameImg},${clickedLocationTopSideLengthOnGameImg}`
+      )
+    );
+
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      querySnapshot.forEach((doc) => {
+        if (doc.id === characterName) {
+          console.log("found");
+        } else {
+          console.log("wrong");
+        }
+        console.log(doc);
+        console.log(doc.id, " => ", doc.data());
+      });
+    } else {
+      console.log("no");
+    }
+  };
+
+  const handleCharacterSelection = async (characterName) => {
+    const adjustedLocation = returnAdjustedLocation();
+    const clickedLocationLeftSideLengthOnGameImg =
+      adjustedLocation.clickedLocationLeftSideLengthOnGameImg;
+    const clickedLocationTopSideLengthOnGameImg =
+      adjustedLocation.clickedLocationTopSideLengthOnGameImg;
+
+    await isCharacterSelectionRight(
+      characterName,
+      clickedLocationLeftSideLengthOnGameImg,
+      clickedLocationTopSideLengthOnGameImg
+    );
   };
 
   return (
@@ -70,9 +147,8 @@ export default function GameScreen() {
       {showCharacterSelector && (
         <CharacterSelector
           location={location}
-          gameImgRef={gameImgRef}
-          headerRef={headerRef}
-        />
+          handleCharacterSelection={handleCharacterSelection}
+          />
       )}
     </div>
   );
