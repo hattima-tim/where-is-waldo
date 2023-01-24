@@ -23,6 +23,8 @@ export default function GameScreen() {
     y: 0,
   });
   const [selectionResult, setSelectionResult] = useState(null);
+  const [selectedCharactersLocations, setSelectedCharactersLocations] =
+    useState([]);
 
   const handleTargetAreaClick = (e) => {
     setShowCharacterSelector(!showCharacterSelector);
@@ -86,6 +88,10 @@ export default function GameScreen() {
       querySnapshot.forEach((doc) => {
         if (doc.id === characterName) {
           setSelectionResult(`${characterName} is found!`);
+          setSelectedCharactersLocations([
+            ...selectedCharactersLocations,
+            location,
+          ]);
         } else {
           setSelectionResult("Wrong! Try again.");
         }
@@ -165,6 +171,35 @@ export default function GameScreen() {
           handleCharacterSelection={handleCharacterSelection}
         />
       )}
+
+      {!selectionResult &&
+        selectedCharactersLocations.map((location) => {
+          return (
+            <span
+              key={location.left}
+              className="text-green-600"
+              style={location}
+            >
+              {/* location.left is used as key because simply setting location
+              itself as a key, is giving 'same key' error
+            */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="h-16 w-16"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </span>
+          );
+        })}
     </div>
   );
 }
