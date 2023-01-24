@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import Characters from "../onBoardScreen/characters";
 import CharacterSelector from "./characterSelector";
+import Alert from "./alert";
 
 export default function GameScreen() {
   const gameImgRef = useRef(null);
@@ -21,9 +22,11 @@ export default function GameScreen() {
     x: 0,
     y: 0,
   });
+  const [selectionResult, setSelectionResult] = useState(null);
 
   const handleTargetAreaClick = (e) => {
     setShowCharacterSelector(!showCharacterSelector);
+    setSelectionResult(null);
     setTargetLocation({
       x: e.pageX - 32, // 32 is the lalf of the target circle
       y: e.pageY - 32, // so,here I am moving the target circle to the center
@@ -82,15 +85,13 @@ export default function GameScreen() {
     if (!querySnapshot.empty) {
       querySnapshot.forEach((doc) => {
         if (doc.id === characterName) {
-          console.log("found");
+          setSelectionResult(`${characterName} is found!`);
         } else {
-          console.log("wrong");
+          setSelectionResult("Wrong! Try again.");
         }
-        console.log(doc);
-        console.log(doc.id, " => ", doc.data());
       });
     } else {
-      console.log("no");
+      setSelectionResult("Wrong! Try again.");
     }
   };
 
@@ -106,6 +107,11 @@ export default function GameScreen() {
       clickedLocationLeftSideLengthOnGameImg,
       clickedLocationTopSideLengthOnGameImg
     );
+  };
+
+  const handleAlertRemoval = () => {
+    setSelectionResult(null);
+    setShowCharacterSelector(false);
   };
 
   return (
@@ -130,13 +136,14 @@ export default function GameScreen() {
             3
           </div>
 
-          {showCharacterListTooltip && (
+          {showCharacterListTooltip && !selectionResult && (
             <div className="absolute right-40 z-10 w-72 rounded-md bg-[#17134d] p-4 text-white transition-all">
               <Characters />
             </div>
           )}
         </div>
       </header>
+
       <img
         src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg"
         alt="universe-113"
@@ -144,11 +151,19 @@ export default function GameScreen() {
         onClick={handleTargetAreaClick}
       ></img>
 
-      {showCharacterSelector && (
+      {selectionResult && (
+        <Alert
+          location={location}
+          selectionResult={selectionResult}
+          handleAlertRemoval={handleAlertRemoval}
+        />
+      )}
+
+      {showCharacterSelector && !selectionResult && (
         <CharacterSelector
           location={location}
           handleCharacterSelection={handleCharacterSelection}
-          />
+        />
       )}
     </div>
   );
