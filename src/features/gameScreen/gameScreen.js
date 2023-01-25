@@ -9,6 +9,7 @@ import {
 import Characters from "../onBoardScreen/characters";
 import CharacterSelector from "./characterSelector";
 import Alert from "./alert";
+import Rive from "@rive-app/react-canvas";
 
 export default function GameScreen() {
   const gameImgRef = useRef(null);
@@ -101,7 +102,9 @@ export default function GameScreen() {
     }
   };
 
+  const [isLoading,setIsLoading] = useState(false);
   const handleCharacterSelection = async (characterName) => {
+    setIsLoading(true);
     const adjustedLocation = returnAdjustedLocation();
     const clickedLocationLeftSideLengthOnGameImg =
       adjustedLocation.clickedLocationLeftSideLengthOnGameImg;
@@ -113,6 +116,7 @@ export default function GameScreen() {
       clickedLocationLeftSideLengthOnGameImg,
       clickedLocationTopSideLengthOnGameImg
     );
+    setIsLoading(false);
   };
 
   const handleAlertRemoval = () => {
@@ -208,6 +212,14 @@ export default function GameScreen() {
             </span>
           );
         })}
+
+      {isLoading && (
+        <Rive
+          src="https://public.rive.app/community/runtime-files/1586-3103-epar-loading-v4.riv"
+          autoPlay={true}
+          style={{ width: "60px", height: "60px", ...location }}
+        />
+      )}
     </div>
   );
 }
