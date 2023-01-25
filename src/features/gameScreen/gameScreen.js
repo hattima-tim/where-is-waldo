@@ -157,10 +157,18 @@ export default function GameScreen() {
         onClick={handleTargetAreaClick}
       ></img>
 
-      {selectionResult && (
+      {selectionResult && selectedCharactersLocations.length !== 3 && (
         <Alert
           location={location}
           selectionResult={selectionResult}
+          handleAlertRemoval={handleAlertRemoval}
+        />
+      )}
+
+      {selectionResult && selectedCharactersLocations.length === 3 && (
+        <Alert
+          location={location}
+          selectionResult={"You have selected all characters!"}
           handleAlertRemoval={handleAlertRemoval}
         />
       )}
