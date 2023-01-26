@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   collection,
   getDocs,
@@ -10,10 +10,14 @@ import Characters from "../onBoardScreen/characters";
 import CharacterSelector from "./characterSelector";
 import Alert from "./alert";
 import Rive from "@rive-app/react-canvas";
+import Confetti from "react-confetti";
 
 export default function GameScreen() {
   const gameImgRef = useRef(null);
+  const gameImgHeight = useRef(null);
+  const gameImgWidth = useRef(null);
   const headerRef = useRef(null);
+  const headerHeight = useRef(null);
 
   const [counter, setCounter] = useState("00.00.00");
   const [showCharacterListTooltip, setShowCharacterListTooltip] =
@@ -44,22 +48,28 @@ export default function GameScreen() {
     top: y,
   };
 
+  useEffect(() => {
+    gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
+    gameImgHeight.current = gameImgRef.current.getBoundingClientRect().height;
+    headerHeight.current = headerRef.current.getBoundingClientRect().height;
+  }, []);
+
   const initialGameImgWidth = 1366;
   const initialGameImgHeight = 1931.6;
 
   const returnAdjustedLocation = () => {
-    const currentImgWidth = gameImgRef.current.getBoundingClientRect().width;
-    const currentImgHeight = gameImgRef.current.getBoundingClientRect().height;
-    const headerHeight = headerRef.current.getBoundingClientRect().height;
+    gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
+    gameImgHeight.current = gameImgRef.current.getBoundingClientRect().height;
+    headerHeight.current = headerRef.current.getBoundingClientRect().height;
 
     // adjust the location for different screens with above information
     const clickedLocationLeftSideLengthOnGameImg = Math.trunc(
-      (initialGameImgWidth / currentImgWidth) * (location.left + 32) // see gamescreen.js for why 32 is added
+      (initialGameImgWidth / gameImgWidth.current) * (location.left + 32) // see gamescreen.js for why 32 is added
     );
 
     const clickedLocationTopSideLengthOnGameImg = Math.trunc(
-      (initialGameImgHeight / currentImgHeight) *
-        (location.top - headerHeight + 32)
+      (initialGameImgHeight / gameImgHeight.current) *
+        (location.top - headerHeight.current + 32)
     ); // since location.top is calculated with pageY, it contains header height
 
     return {
@@ -102,7 +112,7 @@ export default function GameScreen() {
     }
   };
 
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const handleCharacterSelection = async (characterName) => {
     setIsLoading(true);
     const adjustedLocation = returnAdjustedLocation();
@@ -123,6 +133,22 @@ export default function GameScreen() {
     setSelectionResult(null);
     setShowCharacterSelector(false);
   };
+
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  useEffect(() => {
+    let timeoutId;
+    if (selectedCharactersLocations.length === 3) {
+      setShowConfetti(true);
+      setTimeout(() => {
+        timeoutId = setShowConfetti(false);
+      }, 10000);
+    }
+    return () => {
+      setShowConfetti(false);
+      clearTimeout(timeoutId);
+    };
+  }, [selectedCharactersLocations]);
 
   return (
     <div>
@@ -218,6 +244,14 @@ export default function GameScreen() {
           src="https://public.rive.app/community/runtime-files/1586-3103-epar-loading-v4.riv"
           autoPlay={true}
           style={{ width: "60px", height: "60px", ...location }}
+        />
+      )}
+
+      {showConfetti && (
+        <Confetti
+          numberOfPieces={200}
+          width={gameImgWidth.current}
+          height={gameImgHeight.current + headerHeight.current}
         />
       )}
     </div>
