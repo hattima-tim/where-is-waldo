@@ -4,7 +4,7 @@ exports[`Character component is rendered correctly 1`] = `
 <div>
   <div>
     <div
-      class="flex hover:scale-105 w-full flex-col"
+      class="flex w-full flex-col hover:scale-105"
     >
       <p
         class="self-end"
@@ -30,7 +30,7 @@ exports[`Character component is rendered correctly 1`] = `
       </div>
     </div>
     <div
-      class="flex hover:scale-105 w-full flex-col"
+      class="flex w-full flex-col hover:scale-105"
     >
       <p
         class="self-end"
@@ -56,7 +56,7 @@ exports[`Character component is rendered correctly 1`] = `
       </div>
     </div>
     <div
-      class="flex hover:scale-105 w-full flex-col"
+      class="flex w-full flex-col hover:scale-105"
     >
       <p
         class="self-end"

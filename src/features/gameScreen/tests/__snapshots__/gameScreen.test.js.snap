@@ -32,7 +32,6 @@ exports[`GameScreen is rendered correctly 1`] = `
     </header>
     <img
       alt="universe-113"
-      class="cursor-[url('https://res.cloudinary.com/du3oueesv/image/upload/v1673284323/Where%27s%20Waldo/Where_s_Waldo_dot_k9q85x-media_lib_thumb_i9xieg.png'),auto]"
       src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg"
     />
   </div>
@@ -44,21 +43,23 @@ exports[`clicking on gameImage shows character selector 1`] = `
 - First value
 + Second value
 
-@@ -30,7 +30,30 @@
+@@ -29,7 +29,32 @@
+      </header>
       <img
         alt=\\"universe-113\\"
-        class=\\"cursor-[url('https://res.cloudinary.com/du3oueesv/image/upload/v1673284323/Where%27s%20Waldo/Where_s_Waldo_dot_k9q85x-media_lib_thumb_i9xieg.png'),auto]\\"
         src=\\"https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg\\"
       />
 +     <div
 +       class=\\"flex\\"
 +       style=\\"position: absolute;\\"
 +     >
-+       <img
-+         alt=\\"targetCircle\\"
-+         class=\\"max-h-16 w-16\\"
-+         src=\\"https://res.cloudinary.com/du3oueesv/image/upload/v1673284323/Where%27s%20Waldo/Where_s_Waldo_dot_k9q85x-media_lib_thumb_i9xieg.png\\"
-+       />
++       <div
++         class=\\"flex h-16 w-16 items-center  justify-center rounded-full border-4 border-dashed border-white bg-[hsla(0,0%,100%,.3)]\\"
++       >
++         <div
++           class=\\"relative h-1 w-1 rounded-full bg-red-600\\"
++         />
++       </div>
 +       <div
 +         class=\\"z-10 w-72 rounded-md bg-[#17134d] p-4 text-white transition-all\\"
 +       >
@@ -105,5 +106,5 @@ exports[`clicking the circle with 3 written in it, shows a tooltip of characters
       </header>
       <img
         alt=\\"universe-113\\"
-        class=\\"cursor-[url('https://res.cloudinary.com/du3oueesv/image/upload/v1673284323/Where%27s%20Waldo/Where_s_Waldo_dot_k9q85x-media_lib_thumb_i9xieg.png'),auto]\\""
+        src=\\"https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg\\""
 `;
