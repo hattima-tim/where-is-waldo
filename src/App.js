@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import OnBoardScreen from "./features/onBoardScreen/onBoardScreen";
 import GameScreen from "./features/gameScreen/gameScreen";
@@ -16,10 +17,15 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 function App() {
+  const [isGameOn, setIsGameOn] = useState(false);
+
   return (
     <div className="App">
-      <OnBoardScreen />
-      <GameScreen />
+      {!isGameOn && (
+        <OnBoardScreen isGameOn={isGameOn} setIsGameOn={setIsGameOn} />
+      )}
+      
+      {isGameOn && <GameScreen />}
     </div>
   );
 }
