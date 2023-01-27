@@ -1,10 +1,53 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import Characters from "../onBoardScreen/characters";
 
 const Header = forwardRef(function Header({ selectionResult }, ref) {
-  const [counter, setCounter] = useState("00.00.00");
+  const [msCounter, setMsCounter] = useState("00");
+  const [secondCounter, setSecondCounter] = useState("00");
+  const [minuteCounter, setMinuteCounter] = useState("00");
   const [showCharacterListTooltip, setShowCharacterListTooltip] =
     useState(false);
+
+  useEffect(() => {
+    const msIntervalId = setInterval(() => {
+      setMsCounter((prev) =>
+        (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
+          minimumIntegerDigits: 2,
+          useGrouping: false,
+        })
+      );
+    }, 1);
+
+    return () => {
+      clearInterval(msIntervalId);
+    };
+  }, [msCounter]);
+
+  useEffect(() => {
+    const secondIntervalId = setInterval(() => {
+      setSecondCounter((prev) =>
+        (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
+          minimumIntegerDigits: 2,
+          useGrouping: false,
+        })
+      );
+    }, 1000);
+
+    return () => clearInterval(secondIntervalId);
+  }, [secondCounter]);
+
+  useEffect(() => {
+    const minuteIntervalId = setInterval(() => {
+      setMinuteCounter((prev) =>
+        (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
+          minimumIntegerDigits: 2,
+          useGrouping: false,
+        })
+      );
+    }, 60000);
+
+    return () => clearInterval(minuteIntervalId);
+  }, [minuteCounter]);
 
   return (
     <header
@@ -15,7 +58,7 @@ const Header = forwardRef(function Header({ selectionResult }, ref) {
         Where's <span className="text-[#ff0000]">Waldo</span>
       </h1>
       <div role={"timer"} className="text-2xl font-bold text-white">
-        {counter}
+        {minuteCounter}:{secondCounter}:{msCounter}
       </div>
       <div>
         <div
