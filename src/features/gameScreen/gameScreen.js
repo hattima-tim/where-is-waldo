@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useState } from "react";
 import {
   collection,
   getDocs,
@@ -6,27 +6,27 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import Header from "./header";
 import CharacterSelector from "./characterSelector";
 import Alert from "./alert";
 import Rive from "@rive-app/react-canvas";
-import Confetti from "react-confetti";
 
-export default function GameScreen() {
-  const gameImgRef = useRef(null);
-  const gameImgHeight = useRef(null);
-  const gameImgWidth = useRef(null);
-  const headerRef = useRef(null);
-  const headerHeight = useRef(null);
-
+const GameScreen = forwardRef(function GameScreen(
+  {
+    selectionResult,
+    setSelectionResult,
+    selectedCharactersLocations,
+    setSelectedCharactersLocations,
+    headerHeight,
+    gameImgWidth,
+    gameImgHeight,
+  },
+  ref
+) {
   const [showCharacterSelector, setShowCharacterSelector] = useState(false);
   const [targetLocation, setTargetLocation] = useState({
     x: 0,
     y: 0,
   });
-  const [selectionResult, setSelectionResult] = useState(null);
-  const [selectedCharactersLocations, setSelectedCharactersLocations] =
-    useState([]);
 
   const handleTargetAreaClick = (e) => {
     setShowCharacterSelector(!showCharacterSelector);
@@ -45,20 +45,10 @@ export default function GameScreen() {
     top: y,
   };
 
-  useEffect(() => {
-    gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
-    gameImgHeight.current = gameImgRef.current.getBoundingClientRect().height;
-    headerHeight.current = headerRef.current.getBoundingClientRect().height;
-  }, []);
-
   const initialGameImgWidth = 1366;
   const initialGameImgHeight = 1931.6;
 
   const returnAdjustedLocation = () => {
-    gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
-    gameImgHeight.current = gameImgRef.current.getBoundingClientRect().height;
-    headerHeight.current = headerRef.current.getBoundingClientRect().height;
-
     // adjust the location for different screens with above information
     const clickedLocationLeftSideLengthOnGameImg = Math.trunc(
       (initialGameImgWidth / gameImgWidth.current) * (location.left + 32) // see gamescreen.js for why 32 is added
@@ -134,30 +124,12 @@ export default function GameScreen() {
     setShowCharacterSelector(false);
   };
 
-  const [showConfetti, setShowConfetti] = useState(false);
-
-  useEffect(() => {
-    let timeoutId;
-    if (selectedCharactersLocations.length === 3) {
-      setShowConfetti(true);
-      setTimeout(() => {
-        timeoutId = setShowConfetti(false);
-      }, 10000);
-    }
-    return () => {
-      setShowConfetti(false);
-      clearTimeout(timeoutId);
-    };
-  }, [selectedCharactersLocations]);
-
   return (
     <div>
-      <Header selectionResult={selectionResult} ref={headerRef} />
-
       <img
         src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg"
         alt="universe-113"
-        ref={gameImgRef}
+        ref={ref}
         onClick={handleTargetAreaClick}
       ></img>
 
@@ -220,14 +192,8 @@ export default function GameScreen() {
           style={{ width: "60px", height: "60px", ...location }}
         />
       )}
-
-      {showConfetti && (
-        <Confetti
-          numberOfPieces={200}
-          width={gameImgWidth.current}
-          height={gameImgHeight.current + headerHeight.current}
-        />
-      )}
     </div>
   );
-}
+});
+
+export default GameScreen;

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously } from "firebase/auth";
+import Confetti from "react-confetti";
+import Header from "./features/gameScreen/header";
 import OnBoardScreen from "./features/onBoardScreen/onBoardScreen";
 import GameScreen from "./features/gameScreen/gameScreen";
 import "./App.css";
@@ -33,7 +35,40 @@ signInAnonymously(auth)
   });
 
 function App() {
+  const gameImgRef = useRef(null);
+  const gameImgHeight = useRef(null);
+  const gameImgWidth = useRef(null);
+  const headerRef = useRef(null);
+  const headerHeight = useRef(null);
+
   const [isGameOn, setIsGameOn] = useState(false);
+  const [selectedCharactersLocations, setSelectedCharactersLocations] =
+    useState([]);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [selectionResult, setSelectionResult] = useState(null);
+
+  useEffect(() => {
+    if (isGameOn) {
+      gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
+      gameImgHeight.current = gameImgRef.current.getBoundingClientRect().height;
+      headerHeight.current = headerRef.current.getBoundingClientRect().height;
+    }
+  }, [isGameOn]);
+
+  useEffect(() => {
+    let timeoutId;
+    if (selectedCharactersLocations.length === 3) {
+      setSelectedCharactersLocations([]);
+      setShowConfetti(true);
+      setTimeout(() => {
+        timeoutId = setShowConfetti(false);
+      }, 10000);
+    }
+    return () => {
+      setShowConfetti(false);
+      clearTimeout(timeoutId);
+    };
+  }, [selectedCharactersLocations]);
 
   return (
     <div className="App">
@@ -41,7 +76,29 @@ function App() {
         <OnBoardScreen isGameOn={isGameOn} setIsGameOn={setIsGameOn} />
       )}
 
-      {isGameOn && <GameScreen />}
+      {isGameOn && (
+        <>
+          <Header selectionResult={selectionResult} ref={headerRef} />
+          <GameScreen
+            selectionResult={selectionResult}
+            setSelectionResult={setSelectionResult}
+            selectedCharactersLocations={selectedCharactersLocations}
+            setSelectedCharactersLocations={setSelectedCharactersLocations}
+            headerHeight={headerHeight}
+            gameImgWidth={gameImgWidth}
+            gameImgHeight={gameImgHeight}
+            ref={gameImgRef}
+          />
+        </>
+      )}
+
+      {showConfetti && (
+        <Confetti
+          numberOfPieces={200}
+          width={gameImgWidth.current}
+          height={gameImgHeight.current + headerHeight.current}
+        />
+      )}
     </div>
   );
 }
