@@ -95,7 +95,10 @@ export default function GameScreen() {
     if (!querySnapshot.empty) {
       querySnapshot.forEach((doc) => {
         if (doc.id === characterName) {
-          setSelectionResult(`${characterName} is found!`);
+          selectedCharactersLocations.length === 2
+            ? setSelectionResult("You have selected all characters!")
+            : setSelectionResult(`${characterName} is found!`);
+
           setSelectedCharactersLocations([
             ...selectedCharactersLocations,
             location,
@@ -150,7 +153,7 @@ export default function GameScreen() {
   return (
     <div>
       <Header selectionResult={selectionResult} ref={headerRef} />
-      
+
       <img
         src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg"
         alt="universe-113"
