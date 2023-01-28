@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import Characters from "../onBoardScreen/characters";
 
 const Header = forwardRef(function Header({ selectionResult }, ref) {
@@ -7,9 +7,12 @@ const Header = forwardRef(function Header({ selectionResult }, ref) {
   const [minuteCounter, setMinuteCounter] = useState("00");
   const [showCharacterListTooltip, setShowCharacterListTooltip] =
     useState(false);
+  const msIntervalId = useRef("");
+  const secondIntervalId = useRef("");
+  const minuteIntervalId = useRef("");
 
   useEffect(() => {
-    const msIntervalId = setInterval(() => {
+    msIntervalId.current = setInterval(() => {
       setMsCounter((prev) =>
         (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
           minimumIntegerDigits: 2,
@@ -18,13 +21,11 @@ const Header = forwardRef(function Header({ selectionResult }, ref) {
       );
     }, 1);
 
-    return () => {
-      clearInterval(msIntervalId);
-    };
-  }, [msCounter]);
+    return () => clearInterval(msIntervalId.current);
+  }, []);
 
   useEffect(() => {
-    const secondIntervalId = setInterval(() => {
+    secondIntervalId.current = setInterval(() => {
       setSecondCounter((prev) =>
         (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
           minimumIntegerDigits: 2,
@@ -33,11 +34,11 @@ const Header = forwardRef(function Header({ selectionResult }, ref) {
       );
     }, 1000);
 
-    return () => clearInterval(secondIntervalId);
-  }, [secondCounter]);
+    return () => clearInterval(secondIntervalId.current);
+  }, []);
 
   useEffect(() => {
-    const minuteIntervalId = setInterval(() => {
+    minuteIntervalId.current = setInterval(() => {
       setMinuteCounter((prev) =>
         (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
           minimumIntegerDigits: 2,
@@ -46,8 +47,16 @@ const Header = forwardRef(function Header({ selectionResult }, ref) {
       );
     }, 60000);
 
-    return () => clearInterval(minuteIntervalId);
-  }, [minuteCounter]);
+    return () => clearInterval(minuteIntervalId.current);
+  }, []);
+
+  useEffect(() => {
+    if (selectionResult === "You have selected all characters!") {
+      clearInterval(msIntervalId.current);
+      clearInterval(secondIntervalId.current);
+      clearInterval(minuteIntervalId.current);
+    }
+  }, [selectionResult]);
 
   return (
     <header
