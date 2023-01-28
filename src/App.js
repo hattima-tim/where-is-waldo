@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
+import { getAuth, signInAnonymously } from "firebase/auth";
 import OnBoardScreen from "./features/onBoardScreen/onBoardScreen";
 import GameScreen from "./features/gameScreen/gameScreen";
 import "./App.css";
@@ -16,6 +17,21 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
+const auth = getAuth();
+let userId;
+signInAnonymously(auth)
+  .then((result) => {
+    // Signed in..
+    userId = result.user.uid;
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode);
+    console.log(errorMessage);
+    // ...
+  });
+
 function App() {
   const [isGameOn, setIsGameOn] = useState(false);
 
@@ -24,7 +40,7 @@ function App() {
       {!isGameOn && (
         <OnBoardScreen isGameOn={isGameOn} setIsGameOn={setIsGameOn} />
       )}
-      
+
       {isGameOn && <GameScreen />}
     </div>
   );
