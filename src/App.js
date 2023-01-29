@@ -47,6 +47,9 @@ function App() {
     useState([]);
   const [showConfetti, setShowConfetti] = useState(false);
   const [selectionResult, setSelectionResult] = useState(null);
+  const [msCounter, setMsCounter] = useState("00");
+  const [secondCounter, setSecondCounter] = useState("00");
+  const [minuteCounter, setMinuteCounter] = useState("00");
   const [showScoreCard, setShowScoreCard] = useState(false);
 
   useEffect(() => {
@@ -75,7 +78,15 @@ function App() {
 
   return (
     <div className="App">
-      {showScoreCard && <ScoreCard />}
+      {showScoreCard && (
+        <ScoreCard
+          userId={userId}
+          msCounter={msCounter}
+          secondCounter={secondCounter}
+          minuteCounter={minuteCounter}
+          userName={"irfan"}
+        />
+      )}
 
       {!isGameOn && (
         <OnBoardScreen isGameOn={isGameOn} setIsGameOn={setIsGameOn} />
@@ -83,7 +94,16 @@ function App() {
 
       {isGameOn && (
         <>
-          <Header selectionResult={selectionResult} ref={headerRef} />
+          <Header
+            selectionResult={selectionResult}
+            msCounter={msCounter}
+            setMsCounter={setMsCounter}
+            secondCounter={secondCounter}
+            setSecondCounter={setSecondCounter}
+            minuteCounter={minuteCounter}
+            setMinuteCounter={setMinuteCounter}
+            ref={headerRef}
+          />
           <GameScreen
             selectionResult={selectionResult}
             setSelectionResult={setSelectionResult}

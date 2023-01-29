@@ -1,10 +1,18 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
 import Characters from "../onBoardScreen/characters";
 
-const Header = forwardRef(function Header({ selectionResult }, ref) {
-  const [msCounter, setMsCounter] = useState("00");
-  const [secondCounter, setSecondCounter] = useState("00");
-  const [minuteCounter, setMinuteCounter] = useState("00");
+const Header = forwardRef(function Header(
+  {
+    selectionResult,
+    msCounter,
+    setMsCounter,
+    secondCounter,
+    setSecondCounter,
+    minuteCounter,
+    setMinuteCounter,
+  },
+  ref
+) {
   const [showCharacterListTooltip, setShowCharacterListTooltip] =
     useState(false);
   const msIntervalId = useRef("");
@@ -22,7 +30,7 @@ const Header = forwardRef(function Header({ selectionResult }, ref) {
     }, 1);
 
     return () => clearInterval(msIntervalId.current);
-  }, []);
+  }, [setMsCounter]);
 
   useEffect(() => {
     secondIntervalId.current = setInterval(() => {
@@ -35,7 +43,7 @@ const Header = forwardRef(function Header({ selectionResult }, ref) {
     }, 1000);
 
     return () => clearInterval(secondIntervalId.current);
-  }, []);
+  }, [setSecondCounter]);
 
   useEffect(() => {
     minuteIntervalId.current = setInterval(() => {
@@ -48,7 +56,7 @@ const Header = forwardRef(function Header({ selectionResult }, ref) {
     }, 60000);
 
     return () => clearInterval(minuteIntervalId.current);
-  }, []);
+  }, [setMinuteCounter]);
 
   useEffect(() => {
     if (selectionResult === "You have selected all characters!") {
