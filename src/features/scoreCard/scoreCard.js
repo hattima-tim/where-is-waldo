@@ -1,4 +1,36 @@
-export default function ScoreCard() {
+import { useEffect } from "react";
+import { getFirestore, setDoc, doc } from "firebase/firestore";
+
+export default function ScoreCard({
+  userId,
+  msCounter,
+  secondCounter,
+  minuteCounter,
+  userName,
+}) {
+  useEffect(() => {
+    const timeTookForFinishingTheGame = {
+      milliSecond: msCounter,
+      second: secondCounter,
+      minute: minuteCounter,
+    };
+
+    async function pushUserInfoToFirebase() {
+      const db = getFirestore();
+      const userRef = doc(db, `users/${userId}`);
+
+      try {
+        await setDoc(userRef, {
+          name: userName,
+          timeTookForFinishingTheGame: timeTookForFinishingTheGame,
+        });
+      } catch (error) {
+        alert("Something went wrong!");
+      }
+    }
+
+    pushUserInfoToFirebase();
+  }, [userName, userId, msCounter, secondCounter, minuteCounter]);
 
   return (
     <div className="absolute z-50  flex h-full w-full items-center justify-center">
@@ -18,7 +50,7 @@ export default function ScoreCard() {
             <li>EWW 00:00:00</li>
           </ol>
         </div>
-        <div className="flex gap-4 flex-col items-center">
+        <div className="flex flex-col items-center gap-4">
           <h2 className="bold text-3xl">Time</h2>
           <p className="bold text-2xl">2:3:4</p>
           <button className="rounded-full bg-gradient-to-r from-[#2a2c80] via-[#fd1d1d] to-[#fcb045] py-3 px-6 font-bold uppercase text-white transition-transform duration-300 ease-in-out hover:scale-110">
