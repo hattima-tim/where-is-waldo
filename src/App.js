@@ -5,6 +5,7 @@ import Confetti from "react-confetti";
 import Header from "./features/gameScreen/header";
 import OnBoardScreen from "./features/onBoardScreen/onBoardScreen";
 import GameScreen from "./features/gameScreen/gameScreen";
+import ScoreCard from "./features/scoreCard/scoreCard";
 import "./App.css";
 
 const firebaseConfig = {
@@ -46,6 +47,7 @@ function App() {
     useState([]);
   const [showConfetti, setShowConfetti] = useState(false);
   const [selectionResult, setSelectionResult] = useState(null);
+  const [showScoreCard, setShowScoreCard] = useState(false);
 
   useEffect(() => {
     if (isGameOn) {
@@ -57,9 +59,10 @@ function App() {
 
   useEffect(() => {
     let timeoutId;
-    if (selectedCharactersLocations.length === 3) {
+    if (selectionResult === "You have selected all characters!") {
       setSelectedCharactersLocations([]);
       setShowConfetti(true);
+      setShowScoreCard(true);
       setTimeout(() => {
         timeoutId = setShowConfetti(false);
       }, 10000);
@@ -68,10 +71,12 @@ function App() {
       setShowConfetti(false);
       clearTimeout(timeoutId);
     };
-  }, [selectedCharactersLocations]);
+  }, [selectionResult]);
 
   return (
     <div className="App">
+      {showScoreCard && <ScoreCard />}
+
       {!isGameOn && (
         <OnBoardScreen isGameOn={isGameOn} setIsGameOn={setIsGameOn} />
       )}
