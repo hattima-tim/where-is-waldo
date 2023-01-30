@@ -35,6 +35,7 @@ signInAnonymously(auth)
     // ...
   });
 
+let userName = localStorage.getItem("userName");
 function App() {
   const gameImgRef = useRef(null);
   const gameImgHeight = useRef(null);
@@ -75,9 +76,17 @@ function App() {
     };
   }, [selectionResult]);
 
-  const handleSeeScoreboardBtnClick = ()=>{
+  const handleSeeScoreboardBtnClick = () => {
+    if (!userName) {
+      userName = prompt("What is your name?");
+      if (!userName) {
+        alert("Please give your name to proceed.");
+        return;
+      }
+      localStorage.setItem('userName',userName);
+    }
     setShowScoreCard(true);
-  }
+  };
 
   return (
     <div className="App">
@@ -87,7 +96,7 @@ function App() {
           msCounter={msCounter}
           secondCounter={secondCounter}
           minuteCounter={minuteCounter}
-          userName={"irfan"}
+          userName={userName}
         />
       )}
 
