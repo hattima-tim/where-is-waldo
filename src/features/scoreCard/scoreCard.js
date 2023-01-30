@@ -21,6 +21,7 @@ export default function ScoreCard({
 
       try {
         await setDoc(userRef, {
+          id: userId,
           name: userName,
           timeTookForFinishingTheGame: timeTookForFinishingTheGame,
         });
