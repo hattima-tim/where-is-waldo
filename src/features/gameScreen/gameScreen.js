@@ -16,6 +16,7 @@ const GameScreen = forwardRef(function GameScreen(
     setSelectionResult,
     selectedCharactersLocations,
     setSelectedCharactersLocations,
+    handleSeeScoreboardBtnClick,
     headerHeight,
     gameImgWidth,
     gameImgHeight,
@@ -133,19 +134,12 @@ const GameScreen = forwardRef(function GameScreen(
         onClick={handleTargetAreaClick}
       ></img>
 
-      {selectionResult && selectedCharactersLocations.length !== 3 && (
+      {selectionResult && (
         <Alert
           location={location}
           selectionResult={selectionResult}
           handleAlertRemoval={handleAlertRemoval}
-        />
-      )}
-
-      {selectionResult && selectedCharactersLocations.length === 3 && (
-        <Alert
-          location={location}
-          selectionResult={"You have selected all characters!"}
-          handleAlertRemoval={handleAlertRemoval}
+          handleSeeScoreboardBtnClick={handleSeeScoreboardBtnClick}
         />
       )}
 

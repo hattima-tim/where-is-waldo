@@ -2,6 +2,7 @@ export default function Alert({
   location,
   selectionResult,
   handleAlertRemoval,
+  handleSeeScoreboardBtnClick,
 }) {
   let alertType = "singleSuccess";
   if (selectionResult === "Wrong! Try again.") alertType = "failure";
@@ -130,8 +131,11 @@ export default function Alert({
               </strong>
 
               <p className="mt-1 text-sm text-gray-700">{selectionResult}</p>
-              
-              <button className="inline-flex mt-2 items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600">
+
+              <button
+                className="mt-2 inline-flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600"
+                onClick={handleSeeScoreboardBtnClick}
+              >
                 <span className="text-sm"> See Scoreboard </span>
 
                 <svg

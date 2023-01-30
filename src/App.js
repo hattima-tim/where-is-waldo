@@ -65,7 +65,6 @@ function App() {
     if (selectionResult === "You have selected all characters!") {
       setSelectedCharactersLocations([]);
       setShowConfetti(true);
-      setShowScoreCard(true);
       setTimeout(() => {
         timeoutId = setShowConfetti(false);
       }, 10000);
@@ -75,6 +74,10 @@ function App() {
       clearTimeout(timeoutId);
     };
   }, [selectionResult]);
+
+  const handleSeeScoreboardBtnClick = ()=>{
+    setShowScoreCard(true);
+  }
 
   return (
     <div className="App">
@@ -109,6 +112,7 @@ function App() {
             setSelectionResult={setSelectionResult}
             selectedCharactersLocations={selectedCharactersLocations}
             setSelectedCharactersLocations={setSelectedCharactersLocations}
+            handleSeeScoreboardBtnClick={handleSeeScoreboardBtnClick}
             headerHeight={headerHeight}
             gameImgWidth={gameImgWidth}
             gameImgHeight={gameImgHeight}
