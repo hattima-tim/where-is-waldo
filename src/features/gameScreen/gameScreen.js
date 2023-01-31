@@ -118,11 +118,11 @@ const GameScreen = forwardRef(function GameScreen(
       clickedLocationTopSideLengthOnGameImg
     );
     setIsLoading(false);
+    setShowCharacterSelector(false);
   };
 
   const handleAlertRemoval = () => {
     setSelectionResult(null);
-    setShowCharacterSelector(false);
   };
 
   return (
