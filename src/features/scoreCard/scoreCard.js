@@ -81,7 +81,7 @@ export default function ScoreCard({
   const topTenUsers = getTopTenUsers(allUsersInfo);
 
   return (
-    <div className="absolute z-50  flex h-full w-full items-center justify-center">
+    <div className="fixed z-50  flex h-full w-full items-center justify-center">
       <div className="flex items-center justify-around rounded-2xl bg-white p-12 sm:w-11/12 lg:w-1/2">
         <div>
           <h1 className="bold text-3xl">High Scores</h1>
