@@ -97,7 +97,9 @@ export default function ScoreCard({
         </div>
         <div className="flex flex-col items-center gap-4">
           <h2 className="bold text-3xl">Time</h2>
-          <p className="bold text-2xl">2:3:4</p>
+          <p className="bold text-2xl">
+            {minuteCounter}:{secondCounter}:{msCounter}
+          </p>
           <button
             className="rounded-full bg-gradient-to-r from-[#2a2c80] via-[#fd1d1d] to-[#fcb045] py-3 px-6 font-bold uppercase text-white transition-transform duration-300 ease-in-out hover:scale-110"
             onClick={startTheGame}
