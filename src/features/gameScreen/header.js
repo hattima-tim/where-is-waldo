@@ -3,7 +3,6 @@ import Characters from "../onBoardScreen/characters";
 
 const Header = forwardRef(function Header(
   {
-    selectionResult,
     msCounter,
     setMsCounter,
     secondCounter,
@@ -21,6 +20,7 @@ const Header = forwardRef(function Header(
   const minuteIntervalId = useRef("");
 
   useEffect(() => {
+    if(isGameOn){
       msIntervalId.current = setInterval(() => {
         setMsCounter((prev) =>
           (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
@@ -29,11 +29,13 @@ const Header = forwardRef(function Header(
           })
         );
       }, 1);
+    }
 
     return () => clearInterval(msIntervalId.current);
-  }, [setMsCounter]);
+  }, [isGameOn, setMsCounter]);
 
   useEffect(() => {
+    if(isGameOn){
       secondIntervalId.current = setInterval(() => {
         setSecondCounter((prev) =>
           (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
@@ -42,11 +44,13 @@ const Header = forwardRef(function Header(
           })
         );
       }, 1000);
+    }
 
     return () => clearInterval(secondIntervalId.current);
-  }, [setSecondCounter]);
+  }, [isGameOn, setSecondCounter]);
 
   useEffect(() => {
+    if(isGameOn){
       minuteIntervalId.current = setInterval(() => {
         setMinuteCounter((prev) =>
           (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
@@ -55,17 +59,10 @@ const Header = forwardRef(function Header(
           })
         );
       }, 60000);
+    }
 
     return () => clearInterval(minuteIntervalId.current);
-  }, [setMinuteCounter]);
-
-  useEffect(() => {
-    if (selectionResult === "You have selected all characters!") {
-      clearInterval(msIntervalId.current);
-      clearInterval(secondIntervalId.current);
-      clearInterval(minuteIntervalId.current);
-    }
-  }, [selectionResult]);
+  }, [isGameOn, setMinuteCounter]);
 
   return (
     <header
