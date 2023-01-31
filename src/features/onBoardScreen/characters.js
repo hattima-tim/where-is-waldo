@@ -1,4 +1,4 @@
-export default function Characters({handleCharacterSelection = null}) {
+export default function Characters({ handleCharacterSelection = null }) {
   const characters = [
     {
       difficultyLevel: "easy",
@@ -29,19 +29,27 @@ export default function Characters({handleCharacterSelection = null}) {
         return (
           <div
             key={character.name}
-            className="flex w-full flex-col hover:scale-105"
+            className="flex w-full mb-3 lg:m-4 flex-col hover:scale-105"
             onClick={() => handleCharacterSelection(character.name)}
           >
-            <p className="self-end">{character.difficultyLevel}</p>
-            <div className="flex gap-4">
+            <p
+              className={`self-end ${
+                (character.difficultyLevel === "hard" && "text-red-600") ||
+                (character.difficultyLevel === "medium" && "text-yellow-600") ||
+                (character.difficultyLevel === "easy" && "text-green-600")
+              }`}
+            >
+              {character.difficultyLevel}
+            </p>
+            <div className="flex gap-4 lg:gap-8">
               <img
                 src={character.src}
                 alt={character.alt}
-                className="w-8"
+                className="h-12 w-12 lg:h-16 lg:w-16"
               ></img>
-              <div>
+              <div className="text-center">
                 <h4>{character.name}</h4>
-                <p>{character.reference}</p>
+                <span>{character.reference}</span>
               </div>
             </div>
           </div>
