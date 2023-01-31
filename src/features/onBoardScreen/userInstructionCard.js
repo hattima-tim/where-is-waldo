@@ -1,6 +1,6 @@
 import Characters from "./characters";
 
-export default function UserInstructionCard({ setIsGameOn }) {
+export default function UserInstructionCard({ startTheGame }) {
   return (
     <div className="flex w-11/12 border bg-white lg:w-3/5">
       <img
@@ -14,7 +14,7 @@ export default function UserInstructionCard({ setIsGameOn }) {
         <Characters />
         <button
           className="rounded-full bg-gradient-to-r from-[#2a2c80] via-[#fd1d1d] to-[#fcb045] py-2 px-4 font-bold uppercase text-white transition-transform duration-300 ease-in-out hover:scale-110"
-          onClick={() => setIsGameOn(true)}
+          onClick={startTheGame}
         >
           Start
         </button>

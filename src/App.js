@@ -89,6 +89,15 @@ function App() {
     setShowScoreCard(true);
   };
 
+  const startTheGame = () => {
+    setIsGameOn(true);
+    setShowScoreCard(false);
+    setSelectionResult("");
+    setMsCounter("00");
+    setSecondCounter("00");
+    setMinuteCounter("00");
+  };
+
   return (
     <div className="App">
       {showScoreCard && (
@@ -98,11 +107,12 @@ function App() {
           secondCounter={secondCounter}
           minuteCounter={minuteCounter}
           userName={userName}
+          startTheGame={startTheGame}
         />
       )}
 
-      {!isGameOn && (
-        <OnBoardScreen isGameOn={isGameOn} setIsGameOn={setIsGameOn} />
+      {!isGameOn && !selectionResult && !showScoreCard && (
+        <OnBoardScreen startTheGame={startTheGame} />
       )}
 
       <Header
@@ -125,6 +135,7 @@ function App() {
         headerHeight={headerHeight}
         gameImgWidth={gameImgWidth}
         gameImgHeight={gameImgHeight}
+        startTheGame={startTheGame}
         ref={gameImgRef}
       />
 
