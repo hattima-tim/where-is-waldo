@@ -9,7 +9,7 @@ const Header = forwardRef(function Header(
     setSecondCounter,
     minuteCounter,
     setMinuteCounter,
-    isGameOn
+    isGameOn,
   },
   ref
 ) {
@@ -20,7 +20,7 @@ const Header = forwardRef(function Header(
   const minuteIntervalId = useRef("");
 
   useEffect(() => {
-    if(isGameOn){
+    if (isGameOn) {
       msIntervalId.current = setInterval(() => {
         setMsCounter((prev) =>
           (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
@@ -35,7 +35,7 @@ const Header = forwardRef(function Header(
   }, [isGameOn, setMsCounter]);
 
   useEffect(() => {
-    if(isGameOn){
+    if (isGameOn) {
       secondIntervalId.current = setInterval(() => {
         setSecondCounter((prev) =>
           (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
@@ -50,7 +50,7 @@ const Header = forwardRef(function Header(
   }, [isGameOn, setSecondCounter]);
 
   useEffect(() => {
-    if(isGameOn){
+    if (isGameOn) {
       minuteIntervalId.current = setInterval(() => {
         setMinuteCounter((prev) =>
           (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
@@ -66,7 +66,7 @@ const Header = forwardRef(function Header(
 
   return (
     <header
-      className="flex h-16 items-center justify-around bg-[#0e0c31]"
+      className="sticky top-0 flex h-16 items-center justify-around bg-[#0e0c31]"
       ref={ref}
     >
       <h1 className="text-2xl font-bold text-white">
