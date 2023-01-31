@@ -47,7 +47,7 @@ function App() {
   const [selectedCharactersLocations, setSelectedCharactersLocations] =
     useState([]);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [selectionResult, setSelectionResult] = useState(null);
+  const [selectionResult, setSelectionResult] = useState("");
   const [msCounter, setMsCounter] = useState("00");
   const [secondCounter, setSecondCounter] = useState("00");
   const [minuteCounter, setMinuteCounter] = useState("00");
@@ -64,6 +64,7 @@ function App() {
   useEffect(() => {
     let timeoutId;
     if (selectionResult === "You have selected all characters!") {
+      setIsGameOn(false);
       setSelectedCharactersLocations([]);
       setShowConfetti(true);
       setTimeout(() => {
@@ -83,7 +84,7 @@ function App() {
         alert("Please give your name to proceed.");
         return;
       }
-      localStorage.setItem('userName',userName);
+      localStorage.setItem("userName", userName);
     }
     setShowScoreCard(true);
   };
@@ -104,31 +105,28 @@ function App() {
         <OnBoardScreen isGameOn={isGameOn} setIsGameOn={setIsGameOn} />
       )}
 
-      {isGameOn && (
-        <>
-          <Header
-            selectionResult={selectionResult}
-            msCounter={msCounter}
-            setMsCounter={setMsCounter}
-            secondCounter={secondCounter}
-            setSecondCounter={setSecondCounter}
-            minuteCounter={minuteCounter}
-            setMinuteCounter={setMinuteCounter}
-            ref={headerRef}
-          />
-          <GameScreen
-            selectionResult={selectionResult}
-            setSelectionResult={setSelectionResult}
-            selectedCharactersLocations={selectedCharactersLocations}
-            setSelectedCharactersLocations={setSelectedCharactersLocations}
-            handleSeeScoreboardBtnClick={handleSeeScoreboardBtnClick}
-            headerHeight={headerHeight}
-            gameImgWidth={gameImgWidth}
-            gameImgHeight={gameImgHeight}
-            ref={gameImgRef}
-          />
-        </>
-      )}
+      <Header
+        selectionResult={selectionResult}
+        msCounter={msCounter}
+        setMsCounter={setMsCounter}
+        secondCounter={secondCounter}
+        setSecondCounter={setSecondCounter}
+        minuteCounter={minuteCounter}
+        setMinuteCounter={setMinuteCounter}
+        isGameOn={isGameOn}
+        ref={headerRef}
+      />
+      <GameScreen
+        selectionResult={selectionResult}
+        setSelectionResult={setSelectionResult}
+        selectedCharactersLocations={selectedCharactersLocations}
+        setSelectedCharactersLocations={setSelectedCharactersLocations}
+        handleSeeScoreboardBtnClick={handleSeeScoreboardBtnClick}
+        headerHeight={headerHeight}
+        gameImgWidth={gameImgWidth}
+        gameImgHeight={gameImgHeight}
+        ref={gameImgRef}
+      />
 
       {showConfetti && (
         <Confetti
