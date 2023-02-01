@@ -84,7 +84,7 @@ const Header = forwardRef(function Header(
         </div>
 
         {showCharacterListTooltip && (
-          <div className="absolute right-40 z-10 w-72 rounded-md bg-[#17134d] p-4 text-white transition-all">
+          <div className="absolute right-4 lg:right-40 z-10 w-80 rounded-md bg-[#17134d] p-4 pr-8 text-white transition-all">
             <Characters />
           </div>
         )}
