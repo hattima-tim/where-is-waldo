@@ -1,4 +1,7 @@
-export default function Characters({ handleCharacterSelection = null }) {
+export default function Characters({
+  handleCharacterSelection = null,
+  componentNeededFor = null,
+}) {
   const characters = [
     {
       difficultyLevel: "easy",
@@ -24,37 +27,53 @@ export default function Characters({ handleCharacterSelection = null }) {
   ];
 
   return (
-    <div>
-      {characters.map((character) => {
-        return (
-          <div
-            key={character.name}
-            className="flex w-full mb-3 lg:m-4 flex-col hover:scale-105"
-            onClick={() => handleCharacterSelection(character.name)}
-          >
-            <p
-              className={`self-end ${
-                (character.difficultyLevel === "hard" && "text-red-600") ||
-                (character.difficultyLevel === "medium" && "text-yellow-600") ||
-                (character.difficultyLevel === "easy" && "text-green-600")
-              }`}
-            >
-              {character.difficultyLevel}
-            </p>
-            <div className="flex gap-4 lg:gap-8">
-              <img
-                src={character.src}
-                alt={character.alt}
-                className="h-12 w-12 lg:h-16 lg:w-16"
-              ></img>
-              <div className="text-center">
-                <h4>{character.name}</h4>
-                <span>{character.reference}</span>
+    <>
+      {componentNeededFor !== "selector" ? (
+        <div>
+          {characters.map((character) => {
+            return (
+              <div
+                key={character.name}
+                className="mb-3 flex w-full flex-col lg:m-4"
+              >
+                <p
+                  className={`self-end ${
+                    (character.difficultyLevel === "hard" && "text-red-600") ||
+                    (character.difficultyLevel === "medium" &&
+                      "text-yellow-600") ||
+                    (character.difficultyLevel === "easy" && "text-green-600")
+                  }`}
+                >
+                  {character.difficultyLevel}
+                </p>
+                <div className="flex gap-4 lg:gap-8">
+                  <img
+                    src={character.src}
+                    alt={character.alt}
+                    className="h-12 w-12 lg:h-16 lg:w-16"
+                  ></img>
+                  <div className="text-center">
+                    <h4>{character.name}</h4>
+                    <span>{character.reference}</span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4">
+          {characters.map((character) => (
+            <h4
+              key={character.name}
+              className="cursor-pointer"
+              onClick={() => handleCharacterSelection(character.name)}
+            >
+              {character.name}
+            </h4>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
