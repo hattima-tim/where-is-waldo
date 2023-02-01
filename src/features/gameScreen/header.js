@@ -20,49 +20,69 @@ const Header = forwardRef(function Header(
   const minuteIntervalId = useRef("");
 
   useEffect(() => {
-    if (isGameOn) {
+    if (isGameOn && !msIntervalId.current) {
       msIntervalId.current = setInterval(() => {
-        setMsCounter((prev) =>
-          (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })
-        );
+        setMsCounter((prev) => {
+          return (Number(prev) + 1)
+            .toString()
+            .slice(0, 2)
+            .toLocaleString("en-US", {
+              minimumIntegerDigits: 2,
+              useGrouping: false,
+            });
+        });
       }, 1);
     }
 
-    return () => clearInterval(msIntervalId.current);
+    return () => {
+      clearInterval(msIntervalId.current);
+      msIntervalId.current = null;
+    };
   }, [isGameOn, setMsCounter]);
 
   useEffect(() => {
-    if (isGameOn) {
+    if (isGameOn && !secondIntervalId.current) {
       secondIntervalId.current = setInterval(() => {
-        setSecondCounter((prev) =>
-          (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })
-        );
+        setSecondCounter((prev) => {
+          if (prev === "59") return "00";
+          return (Number(prev) + 1)
+            .toString()
+            .slice(0, 2)
+            .toLocaleString("en-US", {
+              minimumIntegerDigits: 2,
+              useGrouping: false,
+            });
+        });
       }, 1000);
     }
 
-    return () => clearInterval(secondIntervalId.current);
+    return () => {
+      clearInterval(secondIntervalId.current);
+      secondIntervalId.current = null;
+    };
   }, [isGameOn, setSecondCounter]);
 
   useEffect(() => {
-    if (isGameOn) {
+    if (isGameOn && !minuteIntervalId.current) {
       minuteIntervalId.current = setInterval(() => {
-        setMinuteCounter((prev) =>
-          (Number(prev) + 1).toString().slice(0, 2).toLocaleString("en-US", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })
-        );
+        setMinuteCounter((prev) => {
+          if (prev === "59") return "00";
+          return (Number(prev) + 1)
+            .toString()
+            .slice(0, 2)
+            .toLocaleString("en-US", {
+              minimumIntegerDigits: 2,
+              useGrouping: false,
+            });
+        });
       }, 60000);
     }
 
-    return () => clearInterval(minuteIntervalId.current);
-  }, [isGameOn, setMinuteCounter]);
+    return () => {
+      clearInterval(minuteIntervalId.current);
+      minuteIntervalId.current = null;
+    };
+  }, [isGameOn,setMinuteCounter]);
 
   return (
     <header
