@@ -116,7 +116,6 @@ function App() {
       )}
 
       <Header
-        selectionResult={selectionResult}
         msCounter={msCounter}
         setMsCounter={setMsCounter}
         secondCounter={secondCounter}
