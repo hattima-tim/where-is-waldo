@@ -66,25 +66,25 @@ const Header = forwardRef(function Header(
 
   return (
     <header
-      className="sticky top-0 flex h-16 items-center justify-around bg-[#0e0c31]"
+      className="sticky top-0 flex h-20 items-center justify-between bg-[#0e0c31]"
       ref={ref}
     >
-      <h1 className="text-2xl font-bold text-white">
-        Where's <span className="text-[#ff0000]">Waldo</span>
+      <h1 className="ml-4 text-xl font-bold text-white">
+        Where's <br /> <span className="text-[#ff0000]">Waldo</span>
       </h1>
       <div role={"timer"} className="text-2xl font-bold text-white">
         {minuteCounter}:{secondCounter}:{msCounter}
       </div>
       <div>
         <div
-          className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[#8d0c0c] text-2xl text-white"
+          className="mr-4 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[#8d0c0c] text-2xl text-white"
           onClick={() => setShowCharacterListTooltip(!showCharacterListTooltip)}
         >
           3
         </div>
 
         {showCharacterListTooltip && (
-          <div className="absolute right-4 lg:right-40 z-10 w-80 rounded-md bg-[#17134d] p-4 pr-8 text-white transition-all">
+          <div className="absolute right-4 z-10 mt-4 w-80 rounded-md bg-[#17134d] p-4 pr-8 text-white transition-all lg:right-8">
             <Characters />
           </div>
         )}
