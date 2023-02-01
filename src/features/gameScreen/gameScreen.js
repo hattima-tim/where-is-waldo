@@ -136,7 +136,6 @@ const GameScreen = forwardRef(function GameScreen(
 
       {selectionResult && (
         <Alert
-          location={location}
           selectionResult={selectionResult}
           handleAlertRemoval={handleAlertRemoval}
           handleSeeScoreboardBtnClick={handleSeeScoreboardBtnClick}

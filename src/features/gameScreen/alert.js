@@ -1,5 +1,4 @@
 export default function Alert({
-  location,
   selectionResult,
   handleAlertRemoval,
   handleSeeScoreboardBtnClick,
@@ -10,12 +9,11 @@ export default function Alert({
     alertType = "gameFinished";
 
   return (
-    <>
+    <div className="fixed top-1/3 flex w-full justify-center">
       {alertType === "failure" && (
         <div
           role="alert"
           className="flex gap-4 rounded border-l-4 border-red-500 bg-red-50 p-4"
-          style={location}
         >
           <p className="text-sm text-red-700">{selectionResult}</p>
           <button
@@ -46,7 +44,6 @@ export default function Alert({
         <div
           role="alert"
           className="rounded-xl border border-gray-100 bg-white p-4 shadow-xl"
-          style={location}
         >
           <div className="flex items-start gap-4">
             <span className="text-green-600">
@@ -103,8 +100,7 @@ export default function Alert({
       {alertType === "gameFinished" && (
         <div
           role="alert"
-          className="rounded-xl border border-gray-100 bg-white p-4 shadow-xl"
-          style={location}
+          className="rounded-xl border border-gray-100 bg-white p-4 pr-7 shadow-xl"
         >
           <div className="flex items-start gap-4">
             <span className="text-green-600">
@@ -157,6 +153,6 @@ export default function Alert({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
