@@ -185,6 +185,27 @@ const GameScreen = forwardRef(function GameScreen(
           style={{ width: "60px", height: "60px", ...location }}
         />
       )}
+
+      <div className="relative bottom-12 mx-2 flex justify-between text-sm lg:bottom-16 lg:mx-8 lg:text-base">
+        <div className="rounded-xl bg-[#0e0c31] p-2 text-white">
+          by{" "}
+          <a
+            href="https://github.com/hattima-tim/where-is-waldo"
+            className="text-red-600"
+          >
+            Irfan
+          </a>
+        </div>
+        <div className="rounded-xl bg-[#0e0c31] p-2 text-white">
+          Image by{" "}
+          <a
+            href="https://www.instagram.com/ad.2.222/"
+            className="text-red-600"
+          >
+            Egor Klyuchnyk
+          </a>
+        </div>
+      </div>
     </div>
   );
 });
