@@ -82,11 +82,11 @@ const Header = forwardRef(function Header(
       clearInterval(minuteIntervalId.current);
       minuteIntervalId.current = null;
     };
-  }, [isGameOn,setMinuteCounter]);
+  }, [isGameOn, setMinuteCounter]);
 
   return (
     <header
-      className="sticky top-0 flex h-20 items-center justify-between bg-[#0e0c31]"
+      className="sticky top-0 z-10 flex h-20 items-center justify-between bg-[#0e0c31]"
       ref={ref}
     >
       <h1 className="ml-4 text-xl font-bold text-white">
