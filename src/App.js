@@ -36,6 +36,7 @@ signInAnonymously(auth)
   });
 
 let userName = localStorage.getItem("userName");
+
 function App() {
   const gameImgRef = useRef(null);
   const gameImgHeight = useRef(null);
@@ -121,6 +122,7 @@ function App() {
         minuteCounter={minuteCounter}
         setMinuteCounter={setMinuteCounter}
         isGameOn={isGameOn}
+        selectionResult={selectionResult}
         ref={headerRef}
       />
       <GameScreen

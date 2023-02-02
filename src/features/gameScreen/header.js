@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import CharactersOnHeader from "./charactersOnHeader";
 
 const Header = forwardRef(function Header(
@@ -10,6 +10,7 @@ const Header = forwardRef(function Header(
     minuteCounter,
     setMinuteCounter,
     isGameOn,
+    selectionResult,
   },
   ref
 ) {
@@ -91,7 +92,7 @@ const Header = forwardRef(function Header(
         Where's <br /> <span className="text-[#ff0000]">Waldo</span>
       </h1>
 
-      <CharactersOnHeader/>
+      <CharactersOnHeader selectionResult={selectionResult} />
 
       <div
         role={"timer"}
