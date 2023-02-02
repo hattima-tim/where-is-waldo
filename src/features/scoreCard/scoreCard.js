@@ -54,11 +54,12 @@ export default function ScoreCard({
         : -1; // sort a before b
     });
     sortedUsers.splice(10);
-
+    
     return sortedUsers;
   };
 
   useEffect(() => {
+    let ignore = false;
     async function getUsersInfoFromFirestore() {
       const db = getFirestore();
       const usersCollectionRef = collection(db, "users");
@@ -66,16 +67,19 @@ export default function ScoreCard({
       try {
         const allUsersInfoCopy = [];
         const usersSnapshot = await getDocs(usersCollectionRef);
-        usersSnapshot.forEach((doc) => {
-          allUsersInfoCopy.push(doc.data());
-        });
-
-        setAllUsersInfo(allUsersInfoCopy);
+        if(!ignore){
+          usersSnapshot.forEach((doc) => {
+            allUsersInfoCopy.push(doc.data());
+          });
+  
+          setAllUsersInfo(allUsersInfoCopy);
+        }
       } catch (error) {
         alert("Something went wrong!");
       }
     }
     getUsersInfoFromFirestore();
+    return ()=> ignore=true;
   }, []);
 
   const topTenUsers = getTopTenUsers(allUsersInfo);
