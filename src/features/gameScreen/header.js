@@ -1,5 +1,4 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
-import Characters from "../onBoardScreen/characters";
 
 const Header = forwardRef(function Header(
   {
@@ -13,8 +12,6 @@ const Header = forwardRef(function Header(
   },
   ref
 ) {
-  const [showCharacterListTooltip, setShowCharacterListTooltip] =
-    useState(false);
   const msIntervalId = useRef("");
   const secondIntervalId = useRef("");
   const minuteIntervalId = useRef("");
@@ -89,25 +86,50 @@ const Header = forwardRef(function Header(
       className="sticky top-0 z-10 flex h-20 items-center justify-between bg-[#0e0c31]"
       ref={ref}
     >
-      <h1 className="ml-4 text-xl font-bold text-white">
+      <h1 className="text-lg font-bold text-white lg:ml-4 lg:text-2xl">
         Where's <br /> <span className="text-[#ff0000]">Waldo</span>
       </h1>
-      <div role={"timer"} className="text-2xl font-bold text-white">
-        {minuteCounter}:{secondCounter}:{msCounter}
-      </div>
-      <div>
-        <div
-          className="mr-4 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[#8d0c0c] text-2xl text-white"
-          onClick={() => setShowCharacterListTooltip(!showCharacterListTooltip)}
-        >
-          3
+
+      <div className="flex items-center gap-2 lg:gap-4">
+        <div className="flex flex-col items-center gap-1">
+          <img
+            src={
+              "https://res.cloudinary.com/du3oueesv/image/upload/v1672759163/Where%27s%20Waldo/cacodemon.1dad269c_ajnuga.png"
+            }
+            alt="Cacodemon"
+            className="h-7 w-7 lg:h-10 lg:w-10"
+          ></img>
+          <span className="text-xs text-white lg:text-sm">Cacodemon</span>
         </div>
 
-        {showCharacterListTooltip && (
-          <div className="absolute right-4 z-10 mt-4 w-80 rounded-md bg-[#17134d] p-4 pr-8 text-white transition-all lg:right-8">
-            <Characters />
-          </div>
-        )}
+        <div className="flex flex-col items-center gap-1">
+          <img
+            src={
+              "https://res.cloudinary.com/du3oueesv/image/upload/v1672759181/Where%27s%20Waldo/bill-cipher.1e7e0fc4_jfln6r.png"
+            }
+            alt="Bill Cipher"
+            className="h-7 w-7 lg:h-10 lg:w-10"
+          ></img>
+          <span className="text-xs text-white lg:text-sm">Bill Cipher</span>
+        </div>
+        
+        <div className="flex flex-col items-center gap-1">
+          <img
+            src={
+              "https://res.cloudinary.com/du3oueesv/image/upload/v1672759200/Where%27s%20Waldo/courage.200fe7a8_jkf3vs.png"
+            }
+            alt="Courage"
+            className="h-7 w-7 lg:h-10 lg:w-10"
+          ></img>
+          <span className="text-xs text-white lg:text-sm">Courage</span>
+        </div>
+      </div>
+
+      <div
+        role={"timer"}
+        className="text-lg font-bold text-white lg:mr-4 lg:text-2xl"
+      >
+        {minuteCounter}:{secondCounter}:{msCounter}
       </div>
     </header>
   );
