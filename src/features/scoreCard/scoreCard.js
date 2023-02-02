@@ -47,11 +47,11 @@ export default function ScoreCard({
     const sortedUsers = allUsersInfoCopy.sort((a, b) => {
       const scoreOfA = a.timeTookForFinishingTheGame;
       const scoreOfB = b.timeTookForFinishingTheGame;
-      return scoreOfA.minute > scoreOfB.minute ||
-        scoreOfA.second > scoreOfB.second ||
-        scoreOfA.milliSecond > scoreOfB.milliSecond
-        ? 1 // sort a after b
-        : -1; // sort a before b
+      return (
+        scoreOfA.minute - scoreOfB.minute ||
+        scoreOfA.second - scoreOfB.second ||
+        scoreOfA.milliSecond - scoreOfB.milliSecond
+      );
     });
     sortedUsers.splice(10);
     
