@@ -54,12 +54,10 @@ function App() {
   const [showScoreCard, setShowScoreCard] = useState(false);
 
   useEffect(() => {
-    if (isGameOn) {
-      gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
-      gameImgHeight.current = gameImgRef.current.getBoundingClientRect().height;
-      headerHeight.current = headerRef.current.getBoundingClientRect().height;
-    }
-  }, [isGameOn]);
+    gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
+    gameImgHeight.current = gameImgRef.current.getBoundingClientRect().height;
+    headerHeight.current = headerRef.current.getBoundingClientRect().height;
+  }, []);
 
   useEffect(() => {
     let timeoutId;
