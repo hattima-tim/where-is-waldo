@@ -58,7 +58,10 @@ function App() {
     gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
     gameImgHeight.current = gameImgRef.current.getBoundingClientRect().height;
     headerHeight.current = headerRef.current.getBoundingClientRect().height;
-  }, []);
+  }, [isGameOn]);
+  // isGameOn is added in the dependency array ,because only running the effect
+  // on mount causing the imgwidth and imgheight to become 0. Maybe because the img
+  // does not fully load when the effect runs
 
   useEffect(() => {
     let timeoutId;
