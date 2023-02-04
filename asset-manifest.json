@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/where-is-waldo/static/css/main.506cf2ec.css",
-    "main.js": "/where-is-waldo/static/js/main.3a41d5e5.js",
+    "main.js": "/where-is-waldo/static/js/main.bf5e0443.js",
     "index.html": "/where-is-waldo/index.html",
     "main.506cf2ec.css.map": "/where-is-waldo/static/css/main.506cf2ec.css.map",
-    "main.3a41d5e5.js.map": "/where-is-waldo/static/js/main.3a41d5e5.js.map"
+    "main.bf5e0443.js.map": "/where-is-waldo/static/js/main.bf5e0443.js.map"
   },
   "entrypoints": [
     "static/css/main.506cf2ec.css",
-    "static/js/main.3a41d5e5.js"
+    "static/js/main.bf5e0443.js"
   ]
 }
