@@ -1,27 +1,26 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-export default function CharactersOnHeader({ selectionResult }) {
-  const selectedCharacters = useRef([]);
-
+export default function CharactersOnHeader({
+  selectionResult,
+  selectedCharacters,
+  setSelectedCharacters,
+}) {
   useEffect(() => {
     if (selectionResult === "Cacodemon is found!")
-      selectedCharacters.current = [...selectedCharacters.current, "cacodemon"];
+      setSelectedCharacters((prev) => [...prev, "cacodemon"]);
 
     if (selectionResult === "Bill Cipher is found!")
-      selectedCharacters.current = [
-        ...selectedCharacters.current,
-        "bill cipher",
-      ];
+      setSelectedCharacters((prev) => [...prev, "bill cipher"]);
 
     if (selectionResult === "Courage is found!")
-      selectedCharacters.current = [...selectedCharacters.current, "courage"];
+      setSelectedCharacters((prev) => [...prev, "courage"]);
 
     if (selectionResult === "You have selected all characters!")
-      selectedCharacters.current = ["cacodemon", "bill cipher", "courage"];
+      setSelectedCharacters(["cacodemon", "bill cipher", "courage"]);
     // last condition is here because,
     // when the last character is selected selectedResult will contain
     // 'You have selected all characters!' , instead of '{characterName} is found'
-  }, [selectionResult]);
+  }, [setSelectedCharacters, selectionResult]);
   // useEffect is used instead of setting the selectedCharacters value on render,
   // because when it was set on render it was containing thousands of values. not sure why
 
@@ -29,7 +28,7 @@ export default function CharactersOnHeader({ selectionResult }) {
     <div className="flex items-center gap-2 lg:gap-4">
       <div
         className={`${
-          selectedCharacters.current.includes("cacodemon") ? "opacity-30" : ""
+          selectedCharacters.includes("cacodemon") ? "opacity-30" : ""
         } flex flex-col items-center gap-1`}
       >
         <img
@@ -44,7 +43,7 @@ export default function CharactersOnHeader({ selectionResult }) {
 
       <div
         className={`${
-          selectedCharacters.current.includes("bill cipher") ? "opacity-30" : ""
+          selectedCharacters.includes("bill cipher") ? "opacity-30" : ""
         } flex flex-col items-center gap-1`}
       >
         <img
@@ -59,7 +58,7 @@ export default function CharactersOnHeader({ selectionResult }) {
 
       <div
         className={`${
-          selectedCharacters.current.includes("courage") ? "opacity-30" : ""
+          selectedCharacters.includes("courage") ? "opacity-30" : ""
         } flex flex-col items-center gap-1`}
       >
         <img

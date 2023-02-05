@@ -43,7 +43,7 @@ function App() {
   const gameImgWidth = useRef(null);
   const headerRef = useRef(null);
   const headerHeight = useRef(null);
-
+  
   const [isGameOn, setIsGameOn] = useState(false);
   const [selectedCharactersLocations, setSelectedCharactersLocations] =
     useState([]);
@@ -53,6 +53,7 @@ function App() {
   const [secondCounter, setSecondCounter] = useState("00");
   const [minuteCounter, setMinuteCounter] = useState("00");
   const [showScoreCard, setShowScoreCard] = useState(false);
+  const [selectedCharacters,setSelectedCharacters] = useState([])
 
   useEffect(() => {
     gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
@@ -98,6 +99,7 @@ function App() {
     setMsCounter("00");
     setSecondCounter("00");
     setMinuteCounter("00");
+    setSelectedCharacters([]);
   };
 
   return (
@@ -126,6 +128,8 @@ function App() {
         setMinuteCounter={setMinuteCounter}
         isGameOn={isGameOn}
         selectionResult={selectionResult}
+        selectedCharacters={selectedCharacters}
+        setSelectedCharacters = {setSelectedCharacters}
         ref={headerRef}
       />
       <GameScreen

@@ -11,6 +11,8 @@ const Header = forwardRef(function Header(
     setMinuteCounter,
     isGameOn,
     selectionResult,
+    selectedCharacters,
+    setSelectedCharacters,
   },
   ref
 ) {
@@ -92,7 +94,11 @@ const Header = forwardRef(function Header(
         Where's <br /> <span className="text-[#ff0000]">Waldo</span>
       </h1>
 
-      <CharactersOnHeader selectionResult={selectionResult} />
+      <CharactersOnHeader
+        selectionResult={selectionResult}
+        selectedCharacters={selectedCharacters}
+        setSelectedCharacters={setSelectedCharacters}
+      />
 
       <div
         role={"timer"}
