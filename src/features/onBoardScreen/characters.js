@@ -29,33 +29,40 @@ export default function Characters({
   return (
     <>
       {componentNeededFor !== "selector" ? (
-        <div>
+        <div className="flex gap-2 md:gap-4">
           {characters.map((character) => {
             return (
               <div
                 key={character.name}
-                className="mb-3 flex w-full flex-col lg:m-4"
+                className="relative w-1/2 rounded-xl border border-gray-100 p-4 shadow-xl md:p-8"
               >
-                <p
-                  className={`self-end ${
-                    (character.difficultyLevel === "hard" && "text-red-600") ||
+                <span
+                  className={`absolute right-2 top-2 rounded-full px-2 py-1 text-xs font-medium ${
+                    (character.difficultyLevel === "hard" &&
+                      " bg-red-100 text-red-600") ||
                     (character.difficultyLevel === "medium" &&
-                      "text-yellow-600") ||
-                    (character.difficultyLevel === "easy" && "text-green-600")
-                  }`}
+                      "bg-yellow-100 text-yellow-600") ||
+                    (character.difficultyLevel === "easy" &&
+                      "bg-green-100 text-green-600")
+                  }  md:right-4 md:top-4 md:px-3 md:py-1.5`}
                 >
                   {character.difficultyLevel}
-                </p>
-                <div className="flex gap-4 lg:gap-8">
+                </span>
+
+                <div className="mt-4 text-gray-500 sm:pr-8">
                   <img
+                    className="h-12 w-12 md:h-20 md:w-20"
                     src={character.src}
                     alt={character.alt}
-                    className="h-12 w-12 lg:h-16 lg:w-16"
                   ></img>
-                  <div className="text-center">
-                    <h4>{character.name}</h4>
-                    <span>{character.reference}</span>
-                  </div>
+
+                  <h3 className="mt-4 text-sm font-bold text-white md:text-xl">
+                    {character.name}
+                  </h3>
+
+                  <span className="mt-2 hidden text-sm sm:block">
+                    {character.reference}
+                  </span>
                 </div>
               </div>
             );
