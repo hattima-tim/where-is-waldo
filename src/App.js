@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously } from "firebase/auth";
 import Confetti from "react-confetti";
-import Header from "./features/gameScreen/header";
+import Header from "./features/header/header";
 import OnBoardScreen from "./features/onBoardScreen/onBoardScreen";
 import GameScreen from "./features/gameScreen/gameScreen";
 import ScoreCard from "./features/scoreCard/scoreCard";
