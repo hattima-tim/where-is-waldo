@@ -2,7 +2,7 @@ import Characters from "./characters";
 
 export default function OnBoardScreen({ startTheGame }) {
   return (
-    <div className="fixed z-20 flex h-full w-full flex-col justify-center gap-6 bg-[#0e0c31] p-2 md:p-8 lg:p-12 lg:px-20">
+    <div className="fixed z-20 flex h-screen w-full flex-col justify-center gap-6 bg-[#0e0c31] p-2 md:p-8 lg:p-12 lg:px-20">
       <h1 className="text-center text-2xl font-bold text-white">
         Where's <span className="text-red-600"> Waldo</span>
       </h1>
