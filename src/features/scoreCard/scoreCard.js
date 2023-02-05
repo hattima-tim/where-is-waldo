@@ -54,7 +54,7 @@ export default function ScoreCard({
       );
     });
     sortedUsers.splice(10);
-    
+
     return sortedUsers;
   };
 
@@ -67,11 +67,11 @@ export default function ScoreCard({
       try {
         const allUsersInfoCopy = [];
         const usersSnapshot = await getDocs(usersCollectionRef);
-        if(!ignore){
+        if (!ignore) {
           usersSnapshot.forEach((doc) => {
             allUsersInfoCopy.push(doc.data());
           });
-  
+
           setAllUsersInfo(allUsersInfoCopy);
         }
       } catch (error) {
@@ -79,19 +79,20 @@ export default function ScoreCard({
       }
     }
     getUsersInfoFromFirestore();
-    return ()=> ignore=true;
+    return () => (ignore = true);
   }, []);
 
   const topTenUsers = getTopTenUsers(allUsersInfo);
 
   return (
-    <div className="fixed z-50  flex h-full w-full items-center justify-center">
-      <div className="flex items-center justify-around rounded-2xl bg-white p-12 sm:w-11/12 lg:w-1/2">
+    <div className="fixed z-50 flex h-full w-full items-center justify-center text-white">
+      <div className="flex items-center justify-around rounded-2xl bg-[#0e0c31] p-12 sm:w-11/12 lg:w-1/2">
         <div>
           <h1 className="bold text-3xl">High Scores</h1>
+
           <ol className="m-4 list-decimal">
             {topTenUsers.map((user) => (
-              <li key={user.id}>
+              <li key={user.id} className="lg:text-lg">
                 {user.name} {user.timeTookForFinishingTheGame.minute}:
                 {user.timeTookForFinishingTheGame.second}:
                 {user.timeTookForFinishingTheGame.milliSecond}
@@ -99,13 +100,16 @@ export default function ScoreCard({
             ))}
           </ol>
         </div>
+
         <div className="flex flex-col items-center gap-4">
           <h2 className="bold text-3xl">Time</h2>
+
           <p className="bold text-2xl">
             {minuteCounter}:{secondCounter}:{msCounter}
           </p>
+
           <button
-            className="rounded-full bg-gradient-to-r from-[#2a2c80] via-[#fd1d1d] to-[#fcb045] py-3 px-6 font-bold uppercase text-white transition-transform duration-300 ease-in-out hover:scale-110"
+            className="rounded-full bg-gradient-to-l from-rose-700 to-pink-600 py-3 px-6 font-bold uppercase text-white transition-transform duration-300 ease-in-out hover:scale-110"
             onClick={startTheGame}
           >
             Restart
