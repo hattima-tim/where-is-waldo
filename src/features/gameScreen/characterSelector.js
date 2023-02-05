@@ -1,4 +1,4 @@
-import Characters from "../onBoardScreen/characters";
+import Characters from "../sharedComponents/characters";
 
 export default function CharacterSelector({
   location,

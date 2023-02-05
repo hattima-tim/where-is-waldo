@@ -1,4 +1,4 @@
-import Characters from "./characters";
+import Characters from "../sharedComponents/characters";
 
 export default function OnBoardScreen({ startTheGame }) {
   return (
