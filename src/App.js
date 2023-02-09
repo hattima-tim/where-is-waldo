@@ -55,6 +55,7 @@ function App() {
   const [minuteCounter, setMinuteCounter] = useState("00");
   const [showScoreCard, setShowScoreCard] = useState(false);
   const [selectedCharacters, setSelectedCharacters] = useState([]);
+  const [showOnBoardScreen, setShowOnBoardScreen] = useState(true);
 
   useEffect(() => {
     gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
@@ -116,13 +117,14 @@ function App() {
         />
       )}
 
-      {!isGameOn && !selectionResult && !showScoreCard && (
-        <OnBoardScreen startTheGame={startTheGame} />
+      {showOnBoardScreen && (
+        <OnBoardScreen setShowOnBoardScreen={setShowOnBoardScreen} />
       )}
 
-      {isGameOn && !selectionResult && !showScoreCard && (
-        <UserInstructionCard startTheGame={startTheGame} />
-      )}
+      {!showOnBoardScreen &&
+        !isGameOn &&
+        !selectionResult &&
+        !showScoreCard && <UserInstructionCard startTheGame={startTheGame} />}
 
       <Header
         msCounter={msCounter}

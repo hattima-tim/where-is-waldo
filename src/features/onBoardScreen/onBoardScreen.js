@@ -1,6 +1,6 @@
 import Characters from "../sharedComponents/characters";
 
-export default function OnBoardScreen({ startTheGame }) {
+export default function OnBoardScreen({ setShowOnBoardScreen }) {
   return (
     <div className="fixed z-20 flex h-screen w-full flex-col justify-center gap-6 bg-[#0e0c31] p-2 md:p-8 lg:p-12 lg:px-20">
       <h1 className="text-center text-2xl font-bold text-white">
@@ -24,9 +24,11 @@ export default function OnBoardScreen({ startTheGame }) {
       <div className="mt-8 flex justify-end">
         <button
           className="inline-flex w-28 cursor-pointer items-center justify-center rounded  bg-gradient-to-l from-blue-700 via-blue-800 to-gray-900 px-8 py-3 text-white transition hover:scale-110 focus:outline-none focus:ring"
-          onClick={startTheGame}
+          onClick={() => {
+            setShowOnBoardScreen(false);
+          }}
         >
-          <span>Start</span>
+          <span>Continue</span>
         </button>
       </div>
     </div>
