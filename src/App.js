@@ -6,6 +6,7 @@ import Header from "./features/header/header";
 import OnBoardScreen from "./features/onBoardScreen/onBoardScreen";
 import GameScreen from "./features/gameScreen/gameScreen";
 import ScoreCard from "./features/scoreCard/scoreCard";
+import UserInstructionCard from "./features/onBoardScreen/userInstructionCard";
 import "./App.css";
 
 const firebaseConfig = {
@@ -43,7 +44,7 @@ function App() {
   const gameImgWidth = useRef(null);
   const headerRef = useRef(null);
   const headerHeight = useRef(null);
-  
+
   const [isGameOn, setIsGameOn] = useState(false);
   const [selectedCharactersLocations, setSelectedCharactersLocations] =
     useState([]);
@@ -53,7 +54,7 @@ function App() {
   const [secondCounter, setSecondCounter] = useState("00");
   const [minuteCounter, setMinuteCounter] = useState("00");
   const [showScoreCard, setShowScoreCard] = useState(false);
-  const [selectedCharacters,setSelectedCharacters] = useState([])
+  const [selectedCharacters, setSelectedCharacters] = useState([]);
 
   useEffect(() => {
     gameImgWidth.current = gameImgRef.current.getBoundingClientRect().width;
@@ -119,6 +120,10 @@ function App() {
         <OnBoardScreen startTheGame={startTheGame} />
       )}
 
+      {isGameOn && !selectionResult && !showScoreCard && (
+        <UserInstructionCard startTheGame={startTheGame} />
+      )}
+
       <Header
         msCounter={msCounter}
         setMsCounter={setMsCounter}
@@ -129,7 +134,7 @@ function App() {
         isGameOn={isGameOn}
         selectionResult={selectionResult}
         selectedCharacters={selectedCharacters}
-        setSelectedCharacters = {setSelectedCharacters}
+        setSelectedCharacters={setSelectedCharacters}
         ref={headerRef}
       />
       <GameScreen
