@@ -3,25 +3,50 @@
 exports[`renders onBoardScreen correctly 1`] = `
 <div>
   <div
-    class="fixed h-full lg:p-20 z-10 flex w-full flex-col items-center justify-center gap-6 bg-[rgba(0,0,0,0.9)]"
+    class="fixed z-20 flex h-screen w-full flex-col justify-center gap-6 bg-[#0e0c31] p-2 md:p-8 lg:p-12 lg:px-20"
   >
     <h1
-      class="mt-8 text-lg font-bold text-white"
+      class="text-center text-2xl font-bold text-white"
     >
-      Where's Waldo
+      Where's 
+      <span
+        class="text-red-600"
+      >
+         Waldo
+      </span>
     </h1>
     <p
-      class="text-white"
+      class="text-center text-white"
     >
       Find these characters on universe 113!
     </p>
-    <div>
-      <p>
-        User Instruction Card
-      </p>
-      ;
-      <button>
-        Start
+    <p>
+      Cacodemon
+    </p>
+    <p>
+      Bill Cipher
+    </p>
+    <p>
+      Courage
+    </p>
+    <div
+      class="relative overflow-hidden rounded-xl text-white opacity-90"
+    >
+      <img
+        alt="universe-113"
+        class="h-24 w-full object-cover md:h-full md:w-full"
+        src="https://res.cloudinary.com/du3oueesv/image/upload/v1672759136/Where%27s%20Waldo/universe-113.0d4fe7c1_pfzqhw.jpg"
+      />
+    </div>
+    <div
+      class="mt-8 flex justify-end"
+    >
+      <button
+        class="inline-flex w-28 cursor-pointer items-center justify-center rounded  bg-gradient-to-l from-blue-700 via-blue-800 to-gray-900 px-8 py-3 text-white transition hover:scale-110 focus:outline-none focus:ring"
+      >
+        <span>
+          Continue
+        </span>
       </button>
     </div>
   </div>

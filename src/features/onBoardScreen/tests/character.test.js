@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import Characters from "../characters";
+import Characters from "../../sharedComponents/characters";
 
 test("Character component is rendered correctly", () => {
   const { container } = render(

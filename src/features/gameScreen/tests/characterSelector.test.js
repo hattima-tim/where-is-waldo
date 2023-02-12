@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import CharacterSelector from "../characterSelector";
 
-jest.mock("../../onBoardScreen/characters", () => () => {
+jest.mock("../../sharedComponents/characters", () => () => {
   return (
     <>
       <p>Cacodemon</p>

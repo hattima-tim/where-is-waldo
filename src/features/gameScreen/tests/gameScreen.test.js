@@ -6,12 +6,25 @@ import GameScreen from "../gameScreen";
 expect.extend({ toMatchDiffSnapshot });
 
 test("GameScreen is rendered correctly", () => {
-  const { container } = render(<GameScreen />);
+  const { container } = render(
+    <GameScreen
+      selectionResult={""}
+      setSelectionResult={""}
+      selectedCharactersLocations={[]}
+      setSelectedCharactersLocations={() => {}}
+      handleSeeScoreboardBtnClick={() => {}}
+      headerHeight={100}
+      gameImgWidth={100}
+      gameImgHeight={100}
+      startTheGame={() => {}}
+      ref={{ current: null }}
+    />
+  );
 
   expect(container).toMatchSnapshot();
 });
 
-jest.mock("../../onBoardScreen/characters", () => () => {
+jest.mock("../../sharedComponents/characters", () => () => {
   return (
     <>
       <p>Cacodemon</p>
@@ -21,22 +34,25 @@ jest.mock("../../onBoardScreen/characters", () => () => {
   );
 });
 
-test("clicking the circle with 3 written in it, shows a tooltip of characters", async () => {
-  const user = userEvent.setup();
-  const { asFragment } = render(<GameScreen />);
-  const firstRender = asFragment();
-
-  const circle = screen.getByText(/3/i);
-  await user.click(circle);
-
-  expect(firstRender).toMatchDiffSnapshot(asFragment());
-});
-
 test("clicking on gameImage shows character selector", async () => {
   const user = userEvent.setup();
-  const { asFragment } = render(<GameScreen />);
+  const { asFragment } = render(
+    <GameScreen
+      selectionResult={""}
+      setSelectionResult={() => {}}
+      selectedCharactersLocations={[]}
+      setSelectedCharactersLocations={() => {}}
+      handleSeeScoreboardBtnClick={() => {}}
+      headerHeight={100}
+      gameImgWidth={100}
+      gameImgHeight={100}
+      startTheGame={() => {}}
+      ref={{ current: null }}
+    />
+  );
   const firstRender = asFragment();
-  const gameImage = screen.getByRole("img");
+
+  const gameImage = screen.getByAltText("universe-113");
 
   await user.click(gameImage);
 

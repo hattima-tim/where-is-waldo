@@ -1,25 +1,31 @@
-import { render,screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import OnBoardScreen from "../onBoardScreen";
+import App from "../../../App";
 
-jest.mock("../characters", () => () => {
+jest.mock("../../sharedComponents/characters", () => () => {
   return (
     <>
-    <p>Cacodemon</p>
-    <p>Bill Cipher</p>
-    <p>Courage</p>
-  </>
-  )
+      <p>Cacodemon</p>
+      <p>Bill Cipher</p>
+      <p>Courage</p>
+    </>
+  );
 });
 
-jest.mock("../userInstructionCard", () => ({setIsGameOn}) => {
+jest.mock("../userInstructionCard", () => ({ setIsGameOn }) => {
   return (
     <div>
       <p>User Instruction Card</p>;
-      <button onClick={()=>{setIsGameOn(true)}}>Start</button>
+      <button
+        onClick={() => {
+          setIsGameOn(true);
+        }}
+      >
+        Start
+      </button>
     </div>
-  )
-  
+  );
 });
 
 test("renders onBoardScreen correctly", () => {
@@ -28,13 +34,15 @@ test("renders onBoardScreen correctly", () => {
   expect(container).toMatchSnapshot();
 });
 
-test('clicking start button remove the OnBoardScreen',async()=>{
-  const user = userEvent.setup()
-  render(<OnBoardScreen/>);
-  const onBoardScreenHeader = screen.getByRole('heading',{name:"Where's Waldo"})
+test("clicking start button remove the OnBoardScreen", async () => {
+  const user = userEvent.setup();
+  render(<App />);
+  const onBoardScreenInstruction = screen.getByText(
+    "Find these characters on universe 113!"
+  );
 
-  const startBtn = screen.getByRole('button',{name:"Start"});
+  const startBtn = screen.getByRole("button", { name: "Continue" });
   await user.click(startBtn);
 
-  expect(onBoardScreenHeader).not.toBeInTheDocument();
-})
+  expect(onBoardScreenInstruction).not.toBeInTheDocument();
+});
